@@ -1,0 +1,15 @@
+[user]
+	email = szigeti.peter23@gmail.com
+	name = plungingChode
+[credential]
+	helper = store
+[pull]
+	rebase = false
+[alias]
+	hist = log --decorate --pretty=format:'%C(yellow)%h%C(reset) %ad | %s%d [%an]' --graph --date=short
+[init]
+	defaultBranch = development
+[diff]
+    tool = vscode
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
