@@ -38,7 +38,7 @@ bindsym XF86AudioMute exec ~/scripts/volume.sh m && $refresh_i3status
 
 # no window titles
 new_window 1pixel
-gaps inner 5
+# gaps inner 5
 
 # default app locations
 for_window [class="Spotify"] move to workspace $ws9
@@ -64,7 +64,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+x exec ~/scripts/shutdown.sh
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id "dmenu_run -fn 'Fira Code-15' -nf '#BBBBBB' -nb '#222222' -sb '#2D85BF' -sf '#EEEEEE' -p 'run '"
+bindsym $mod+d exec --no-startup-id "dmenu_run -b -fn 'Fira Code-15' -nf '#BBBBBB' -nb '#222222' -sb '#2D85BF' -sf '#EEEEEE' -p 'run '"
 
 # Screenshot hotkeys
 bindsym $mod+Print exec "escrotum ~/Pictures/Screenshot_$(date +%Y-%m-%dT%H-%M-%S).png"
@@ -193,7 +193,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    position top
+    position bottom
     status_command i3status
     font pango:Fira Code 14
     workspace_min_width 30
