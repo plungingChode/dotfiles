@@ -21,7 +21,7 @@ use_color=true
 # Set colorful PS1 only on colorful terminals.
 # dircolors --print-database uses its own built-in database
 # instead of using /etc/DIR_COLORS.  Try to use the external file
-# first to tae advantage of user additions.  Use internal bash
+# first to take advantage of user additions.  Use internal bash
 # globbing instead of external grep binary.
 safe_term=${TERM//[^[:alnum:]]/?}   # sanitize TERM
 match_lhs=""
@@ -77,7 +77,7 @@ alias ll='ls -l'
 alias la='ls -a'
 alias l='ls --classify'
 alias svn-diff='vimdiff <(svn diff)'
-alias cmae-init='~/scripts/cmake_init.sh'
+alias cmake-init='~/scripts/cmake_init.sh'
 alias flux='xflux -l 47.497913 -g 19.040236'
 xhost +local:root > /dev/null 2>&1
 alias peda='~/scripts/peda.sh'
