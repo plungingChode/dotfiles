@@ -1,67 +1,33 @@
-!! nord color scheme
-!! #define #232831 #2E3440
-#define #232831 232831
-#define nord1 #3B4252
-#define nord2 #434C5E
-#define nord3 #4C566A
-#define nord4 #D8DEE9
-#define nord5 #E5E9F0
-#define nord6 #ECEFF4
-#define nord7 #8FBCBB
-#define nord8 #88C0D0
-#define nord9 #81A1C1
-#define nord10 #5E81AC
-#define nord11 #BF616A
-#define nord12 #D08770
-#define nord13 #EBCB8B
-#define nord14 #A3BE8C
-#define #B48EAD #B48EAD
+! Original theme https://github.com/nathanbuchar/atom-one-dark-terminal
+*.foreground:    #e3e5e9
+*.background:    #1E2127
+*.cursorColor:   #5C6370
+*.highlightColor:#3A3F4B
 
-*.foreground:   #D8DEE9
-*.background:   #232831
-*.cursorColor:  #D8DEE9
-!! *fading: 35
-!! *fadeColor: #4C566A
-
-*.color0: #3B4252
-*.color1: #BF616A
-*.color2: #A3BE8C
-*.color3: #EBCB8B
-*.color4: #81A1C1
-*.color5: #B48EAD
-*.color6: #88C0D0
-*.color7: #E5E9F0
-*.color8: #4C566A
-*.color9: #BF616A
-*.color10: #A3BE8C
-*.color11: #EBCB8B
-*.color12: #81A1C1
-*.color13: #B48EAD
-*.color14: #8FBCBB
-*.color15: #ECEFF4
-
-!! URxvt Appearance
-URxvt.font: xft:Fira Code:style=Regular:pixelsize=19
-URxvt.boldFont: xft:Fira Code:style=Bold:pixelsize=19
-URxvt.italicFont: xft:Fira Code:style=Light:pixelsize=19
-URxvt.letterSpace: 0
-URxvt.lineSpace: 0
-URxvt.geometry: 92x24
-URxvt.internalBorder: 12
-URxvt.cursorBlink: false
-URxvt.cursorUnderline: false
-URxvt.saveline: 2048
-URxvt.scrollBar: false
-URxvt.scrollBar_right: false
-URxvt.urgentOnBell: true
-URxvt.depth: 24
-URxvt.fading: 0
-URxvt.iso14755: false
-
-URxvt.keysym.Shift-Control-V: eval:paste_clipboard
-URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard 
-URxvt.keysym.Control-Left: \033[1;5D
-URxvt.keysym.Control-Right: \033[1;5C
+! Negro y gris
+*.color0:        #1E2127
+*.color8:        #5C6370
+! Rojos
+*.color1:        #E06C75
+*.color9:        #E06C75
+! Verde
+*.color2:        #98C379
+*.color10:       #98C379
+! Amarillo
+*.color3:        #D19A66
+*.color11:       #D19A66
+! Azul
+*.color4:        #61AFEF
+*.color12:       #61AFEF
+! Magenta
+*.color5:        #C678DD
+*.color13:       #C678DD
+! Cyan
+*.color6:        #56B6C2
+*.color14:       #56B6C2
+! Blanco
+*.color7:        #ABB2BF
+*.color15:       #FFFFFF
 
 !! Cursor theme
 Xcursor.theme: xcursor-oxygen

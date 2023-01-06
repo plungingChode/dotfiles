@@ -37,7 +37,8 @@ bindsym XF86AudioLowerVolume exec ~/scripts/volume.sh down && $refresh_i3status
 bindsym XF86AudioMute exec ~/scripts/volume.sh m && $refresh_i3status
 
 # no window titles
-new_window 1pixel
+# new_window 1pixel
+for_window [class="^.*"] border pixel 2
 # gaps inner 5
 
 # default app locations
@@ -55,13 +56,16 @@ focus_follows_mouse no
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # shutdown & reboot
 bindsym $mod+Shift+x exec ~/scripts/shutdown.sh
+
+# audio device selection
+bindsym $mod+Shift+a exec ~/scripts/adev.sh
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id "dmenu_run -b -fn 'Fira Code-15' -nf '#BBBBBB' -nb '#222222' -sb '#2D85BF' -sf '#EEEEEE' -p 'run '"
