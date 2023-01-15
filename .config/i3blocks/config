@@ -1,0 +1,31 @@
+markup=pango
+
+[keyboard_layout]
+command=~/scripts/i3blocks/keyboard.sh
+interval=once
+signal=10
+
+[volume]
+command=~/scripts/i3blocks/volume.sh
+interval=once
+signal=10
+
+[cpu]
+command=~/scripts/i3blocks/cpu.sh
+interval=3
+
+[memory]
+command=~/scripts/i3blocks/memory.sh
+interval=3
+
+[battery]
+command=~/scripts/i3blocks/battery.sh
+interval=5
+
+[date]
+command=date +" %b. %d. "
+interval=5
+
+[time]
+command=date +" %H:%M "
+interval=5

@@ -15,7 +15,7 @@
 # Current brightness
 brightness=$(brightnessctl g)
 
-if [ $1 = "down" -a $brightness -gt 6000 ]; then
+if [ $1 = "down" -a $brightness -gt "6000" ]; then
     brightnessctl -q -d intel_backlight s 5%-
 elif [ $1 = "up" ]; then
     brightnessctl -q -d intel_backlight s 5%+
@@ -23,5 +23,5 @@ fi
 
 brightness=$(brightnessctl g)
 icon="/usr/share/icons/Faba/48x48/notifications/notification-display-brightness.svg"
-progress=$(~/scripts/progress.sh $brightness 120000)
+progress=$(~/scripts/progress.sh "$brightness" 120000)
 dunstify -a 'brightnessChange' -r 69420 -i "$icon" " $progress" 

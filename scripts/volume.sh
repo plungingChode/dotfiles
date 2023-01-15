@@ -11,34 +11,51 @@
 #    * m    - Toggle mute.
 #
 
-sink="@DEFAULT_SINK@"
+SINK="@DEFAULT_SINK@"
+MAX_VOLUME="150"
 
-if [ $1 = "up" ]; then
-    pactl set-sink-mute $sink off
-    pactl set-sink-volume $sink +2%
-elif [ $1 = "down" ]; then
-    pactl set-sink-mute $sink off
-    pactl set-sink-volume $sink -2%
-elif [ $1 = "m" ]; then
-    pactl set-sink-mute $sink toggle
-fi
+case $1 in
+    "u" | "up")
+        pactl set-sink-mute $SINK off
+        pactl set-sink-volume $SINK +2%
+        ;;
+    "d" | "down")
+        pactl set-sink-mute $SINK off
+        pactl set-sink-volume $SINK -2%
+        ;;
+    "m" | "mute")
+        pactl set-sink-mute $SINK toggle
+        ;;
+    *)
+        echo "unknown argument $1"
+        exit 1
+        ;;
+esac
 
-sinks=$(pacmd list-sinks)
-active_sink_index=$(echo "$sinks" | awk '/index:/ { print $1 }' | awk '/\*/ { print NR }')
-volume=$(echo "$sinks" | awk '/volume: front/ { print $5 }' | sed 's/[^0-9]*//g' | sed "$active_sink_index p;d")
-mute=$(echo "$sinks" | awk '/muted/ { print $2 }')
-icon="/usr/share/icons/Faba/48x48/notifications/"
+volume=$(
+    pactl get-sink-volume "$SINK" \
+        | sd "%.*" "" \
+        | sd ".*? / " "" \
+        | head -n 1
+)
+mute=$(
+    pactl get-sink-mute "$SINK" \
+        | sd "Mute: " ""
+)
+icon="/usr/share/icons/Faba/48x48/notifications"
 
-if [ "$volume" -gt 150 ]; then
+# Cap volume at MAX_VOLUME
+if [ "$volume" -gt "$MAX_VOLUME" ]; then
     volume=150
-    pactl set-sink-volume $sink 150%
+    pactl set-sink-volume "$SINK" "$MAX_VOLUME"%
 fi 
+
 if [[ "$mute" =~ "yes" ]]; then
-    icon=$icon"notification-audio-volume-off.svg"
+    icon="${icon}/notification-audio-volume-off.svg"
     volume=0
 else
-    icon=$icon"notification-audio-volume-medium.svg"
+    icon="${icon}/notification-audio-volume-medium.svg"
 fi
 
-progress=$(~/scripts/progress.sh $volume 150)
+progress=$(~/scripts/progress.sh "$volume" "$MAX_VOLUME")
 dunstify -a 'volumeChange' -r 69420 -i "$icon" " $progress" 
