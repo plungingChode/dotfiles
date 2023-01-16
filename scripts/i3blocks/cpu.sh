@@ -4,7 +4,7 @@ cpu_load=$(vmstat 1 2 | tail -1 | awk '{ printf("%3d", 100 - $15)}')
 
 icon=""
 exit_code="0"
-color=""
+color="#BBBBBB"
 
 if [ "$cpu_load" -gt "80" ];
 then

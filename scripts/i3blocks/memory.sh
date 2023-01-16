@@ -10,14 +10,14 @@ gbytes_used=$(echo "scale=2; $bytes_used / (1024 * 1024)" | bc | sd "^\." "0.")
 
 # https://fontawesome.com/icons/memory
 icon=""
-color=""
+color="#BBBBBB"
 
 exit_code=0
 used_percent=$(( $bytes_used * 100 / $bytes_total ))
 
 if [ "$used_percent" -gt "90" ];
 then
-    color=""
+    color="#BBBBBB"
     exit_code=33
 elif [ "$used_percent" -gt "60" ];
 then

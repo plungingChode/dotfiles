@@ -24,14 +24,13 @@ icon_quarter=""
 #https://fontawesome.com/icons/battery-empty
 icon_empty=""
 
-color=""
+color="#BBBBBB"
 exit_code=0
 icon="$icon_empty"
-if [ "$status" = "Charging" ];
+if [ "$status" != "Discharging" ];
 then
     if [ $current_charge_percent -lt "99" ];
     then
-        # color="color='#FFF859'" # yellow
         color="#FFF859" # yellow
     fi
     icon=$icon_charging

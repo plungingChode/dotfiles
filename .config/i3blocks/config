@@ -6,7 +6,7 @@ interval=once
 signal=10
 
 [volume]
-command=~/scripts/i3blocks/volume.sh
+command=~/scripts/i3blocks/volume.sh $button
 interval=once
 signal=10
 
