@@ -1,14 +1,16 @@
 [user]
-	email = szigeti.peter23@gmail.com
-	name = plungingChode
+    email = szigeti.peter23@gmail.com
+    name = plungingChode
 [credential]
-	helper = store
+    helper = store
 [pull]
-	rebase = false
+    rebase = false
 [alias]
-	hist = log --decorate --pretty=format:'%C(yellow)%h%C(reset) %ad | %s%d [%an]' --graph --date=short
+    s = status -s
+    l = log --pretty=oneline -n 20 --graph --abbrev-commit
+    hist = log --decorate --pretty=format:'%C(yellow)%h%C(reset) %ad | %s%d [%an]' --graph --date=short
 [init]
-	defaultBranch = master
+    defaultBranch = master
 [core]
     pager = delta
 [interactive]
@@ -24,3 +26,4 @@
     conflictstyle = diff3
 [diff]
     colorMoved = default
+

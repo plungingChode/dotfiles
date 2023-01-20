@@ -6,9 +6,12 @@ interval=once
 signal=10
 
 [volume]
-command=~/scripts/i3blocks/volume.sh $button
-interval=once
-signal=10
+command=~/scripts/i3blocks/volume/target/release/volume
+interval=persist
+format=json
+# command=~/scripts/i3blocks/volume.sh $button
+# interval=once
+# signal=10
 
 [cpu]
 command=~/scripts/i3blocks/cpu.sh

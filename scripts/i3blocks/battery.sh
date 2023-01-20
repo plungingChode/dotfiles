@@ -34,16 +34,16 @@ then
         color="#FFF859" # yellow
     fi
     icon=$icon_charging
-elif [ $current_charge_percent -gt "75" ];
+elif [ $current_charge_percent -gt "90" ];
 then
     icon=$icon_full
-elif [ $current_charge_percent -gt "50" ];
+elif [ $current_charge_percent -gt "75" ];
 then
     icon=$icon_three_quarters
-elif [ $current_charge_percent -gt "25" ];
+elif [ $current_charge_percent -gt "50" ];
 then
     icon=$icon_half
-elif [ $current_charge_percent -gt "10" ];
+elif [ $current_charge_percent -gt "25" ];
 then
     icon=$icon_quarter
 fi
