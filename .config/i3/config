@@ -21,23 +21,34 @@ client.focused #008080 #3498DB #FFFFFF #3498DB
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-# start policy agent
+# Start policy agent
 exec --no-startup-id lxpolkit
 
+# Load background
+exec --no-startup-id nitrogen --restore &
+
+# Start Flux (blue light filter after sundown)
+exec --no-startup-id xflux -l 47.497913 -g 19.040236
+
+# Start EasyEffects to enable audio equalizer
+exec --no-startup-id easyeffects --gapplication-service
+
+# Watch volume/audio device changes and update the status bar
+exec --no-startup-id ~/scripts/volumed
+
 # adjust volume
-set $refresh_i3blocks pkill -RTMIN+10 i3blocks
-bindsym XF86AudioRaiseVolume exec ~/scripts/volume.sh up && $refresh_i3blocks
-bindsym XF86AudioLowerVolume exec ~/scripts/volume.sh down && $refresh_i3blocks
-bindsym XF86AudioMute exec ~/scripts/volume.sh m && $refresh_i3blocks
+bindsym XF86AudioRaiseVolume exec ~/scripts/volume up
+bindsym XF86AudioLowerVolume exec ~/scripts/volume down
+bindsym XF86AudioMute exec ~/scripts/volume mute
 
 # send update signal to i3blocks on keyboard layout change
-bindsym $mod+space exec ~/scripts/toggle-keyboard-layout.sh && $refresh_i3blocks 
+bindsym $mod+space exec ~/scripts/toggle-keyboard-layout && pkill -RTMIN+10 i3blocks
 
 # no window titles
 # new_window 1pixel
@@ -68,14 +79,14 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+x exec ~/scripts/shutdown.sh
 
 # audio device selection
-bindsym $mod+Shift+a exec ~/scripts/adev.sh
+bindsym $mod+Shift+a exec ~/scripts/select-audio-device --interactive
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id "dmenu_run -b -fn 'Fira Code-15' -nf '#BBBBBB' -nb '#222222' -sb '#2D85BF' -sf '#EEEEEE' -p 'run '"
 
 # Screenshot hotkeys
-bindsym $mod+Print exec ~/scripts/screenshot.sh "fullscreen"
-bindsym $mod+Shift+Print exec ~/scripts/screenshot.sh "clip" 
+bindsym $mod+Print exec ~/scripts/screenshot "fullscreen"
+bindsym $mod+Shift+Print exec ~/scripts/screenshot "clip" 
 
 # change focus
 bindsym $mod+j focus left
@@ -162,8 +173,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # brightness/volume controls
-bindsym XF86MonBrightnessUp exec ~/scripts/brightness.sh up
-bindsym XF86MonBrightnessDown exec ~/scripts/brightness.sh down
+bindsym XF86MonBrightnessUp exec ~/scripts/brightness up
+bindsym XF86MonBrightnessDown exec ~/scripts/brightness down
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause

@@ -24,7 +24,7 @@ then
     color="#FFF859"
 fi
 
-icon="<span face='Font Awesome 5 Free'>$icon</span>"
+icon="<span face='Font Awesome 6 Free'>$icon</span>"
 full_text=" $icon ${gbytes_used} GB "
 
 echo -e "$full_text\n$full_text\n$color"

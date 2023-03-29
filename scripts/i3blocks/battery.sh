@@ -53,7 +53,7 @@ then
     exit_code="33"
 fi
 
-icon="<span face='Font Awesome 5 Free'>$icon</span>"
+icon="<span face='Font Awesome 6 Free'>$icon</span>"
 full_text=" $icon ${abs_charge_percent}% "
 
 echo -e "$full_text\n$full_text\n$color"

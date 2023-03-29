@@ -4,7 +4,7 @@
 
 # Collect available audio devices in "<device name> [<device id>]" format,
 # with the devices separated by newlines
-awkout=$(pacmd list-sinks | awk '{
+sinks=$(pacmd list-sinks | awk '{
     # Indexes 
     if ($1 == "index:" || $1 == "*") {
         # Available devices
@@ -27,10 +27,32 @@ awkout=$(pacmd list-sinks | awk '{
     }
 }')
 
+
 # Result format <device name> "["<device id>"]""
-result=$(echo "$awkout" | dmenu -b -fn 'Fira Code-15' -nf '#BBBBBB' -nb '#222222' -sf '#EEEEEE' -p 'Select audio device')
+result=$(echo "$sinks" | dmenu -b -fn 'Fira Code-15' -nf '#BBBBBB' -nb '#222222' -sf '#EEEEEE' -p 'Select audio device')
 regex="\[([0-9]+)\]"
 if [[ $result =~ $regex ]]
 then
     pacmd set-default-sink ${BASH_REMATCH[1]}
 fi
+
+# List ALSA cards, select human readable names (odd rows, after a dash) then
+# remove the other (even) rows
+cards=$(
+     cat /proc/asound/cards \
+      | sd '.* - (.*)' '$1' \
+      | sd '\n\s+.*(\n)?' '$1'
+)
+
+idx="0"
+selected_card_idx="0"
+while read line;
+do
+    if [[ $result =~ $line ]]
+    then
+        selected_card_idx=$idx
+    fi
+    (( idx+=1 ))
+done <<< $(echo "$cards")
+
+echo $selected_card_idx

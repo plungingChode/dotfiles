@@ -33,7 +33,7 @@ fn print_i3blocks_status() {
     };
 
     let full_text = format!(
-        " <span face='Font Awesome 5 Free'>{}</span> {}% ",
+        " <span face='Font Awesome 6 Free'>{}</span> {}% ",
         icon,
         volume
     );

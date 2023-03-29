@@ -14,7 +14,6 @@ then
     color="#FFF859"
 fi
 
-
-full_text=" <span face='Font Awesome 5 Free'>$icon</span> ${cpu_load}% "
+full_text=" <span face='Font Awesome 6 Free'>$icon</span> ${cpu_load}% "
 echo -e "$full_text\n$full_text\n$color" 
 exit "$exit_code"
