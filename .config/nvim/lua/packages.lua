@@ -29,6 +29,9 @@ return require("packer").startup(function(use)
   -- Highlight, edit, and navigate code
   use({
     "nvim-treesitter/nvim-treesitter",
+    -- Typescript indentation is broken after this one, see 
+    -- https://github.com/nvim-treesitter/nvim-treesitter/issues/4842
+    commit = "aa44e5fc5f301eb934698b04c71e65b44c21c4fe",
     run = function()
       pcall(require("nvim-treesitter.install").update { with_sync = true })
     end,

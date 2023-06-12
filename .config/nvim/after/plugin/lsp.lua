@@ -29,6 +29,32 @@ lsp.configure("lua_ls", {
   }
 })
 
+-- lsp.configure("tailwindcss", {
+--   settings = {
+--     tailwindCSS = {
+--       colorDecorators = false,
+--       codeActions = false,
+--       suggestions = false,
+--       validate = false,
+--       files = {
+--         exclude = {
+--           "**/.git/**",
+--           "**/node_modules/**",
+--           "**/.hg/**",
+--           "**/.svn/**",
+--           "*.php",
+--         }
+--       },
+--       experimental = {
+--         classRegex = {
+--           'tailwind\\("(.*)"\\)',
+--           'tw\\("(.*)"\\)'
+--         }
+--       }
+--     }
+--   }
+-- });
+
 local on_attach = function(client, bufnr)
   local map = function(mode, keys, func, desc)
     if desc then

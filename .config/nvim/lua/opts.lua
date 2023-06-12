@@ -64,3 +64,9 @@ vim.g.netrw_winsize = 25
 
 vim.o.foldmethod = "marker"
 
+-- Enable project-local configuration extension
+vim.o.exrc = true
+
+-- Disable SQL omni completion
+vim.g.omni_sql_no_default_maps = 1
+
