@@ -1,10 +1,10 @@
 [user]
-    email = szigeti.peter23@gmail.com
-    name = plungingChode
+    email = p.szigeti@adiumsoft.hu
+    name = Péter SZIGETI
 [credential]
     helper = store
 [pull]
-    rebase = false
+    ff = only
 [alias]
     s = status -s
     l = log --pretty=oneline -n 20 --graph --abbrev-commit
