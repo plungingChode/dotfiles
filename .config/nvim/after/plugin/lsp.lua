@@ -1,6 +1,7 @@
 local u = require("util")
 local cmp = require("cmp")
 local lsp = require("lsp-zero")
+local lsp_util = require("lspconfig").util
 local telescope = require("telescope.builtin")
 
 local cmp_action = lsp.cmp_action()
@@ -17,6 +18,7 @@ require("fidget").setup()
 -- nvim API types
 require("neodev").setup()
 
+
 lsp.configure("lua_ls", {
   settings = {
     Lua = {
@@ -28,6 +30,10 @@ lsp.configure("lua_ls", {
     }
   }
 })
+
+-- lsp.configure("phpactor", {
+--   root_dir = lsp_util.root_pattern(".phpactor.json", "composer.json", ".git")
+-- })
 
 -- lsp.configure("tailwindcss", {
 --   settings = {
@@ -161,6 +167,13 @@ cmp.setup({
       return vim_item
     end,
   },
+})
+
+require("lspconfig").gdscript.setup({
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150
+  }
 })
 
 lsp.setup()

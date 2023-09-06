@@ -8,18 +8,6 @@ dap.adapters.php = {
   args = { os.getenv('HOME') .. "/source/vscode-php-debug/out/phpDebug.js" },
 }
 
-dap.configurations.php = {
-  {
-    type = "php",
-    request = "launch",
-    name = "Listen for Xdebug",
-    port = 9003,
-    log = true,
-    serverSourceRoot = "/srv/http",
-    localSourceRoot = "/srv/http"
-  }
-}
-
 -- Javascript/Firefox
 dap.adapters.firefox = {
   type = "executable",
@@ -42,6 +30,26 @@ dap.configurations.javascript = {
 dap.configurations.typescriptreact = dap.configurations.javascript
 dap.configurations.typescript = dap.configurations.javascript
 
+-- Godot
+dap.adapters.godot = {
+  type = "server",
+  host = "127.0.0.1",
+  port = 6006,
+}
+
+dap.configurations.gdscript = {
+  {
+    type = "godot",
+    request = "launch",
+    name = "Launch scene",
+    project = "${workspaceFolder}",
+    launch_scene = true,
+  }
+}
+
+-- Go
+require('dap-go').setup()
+
 vim.keymap.set("n", "<F5>", dap.continue);
 vim.keymap.set("n", "<S-F5>", function()
   dap.terminate()
@@ -58,22 +66,24 @@ vim.keymap.set("n", "<leader>dcp", function()
 end)
 vim.keymap.set("n", "<F10>", dap.step_into);
 vim.keymap.set("n", "<F11>", dap.step_over);
+vim.keymap.set("n", "<F12>", dap.step_out);
+vim.api.nvim_create_user_command("DapBreakOnExceptions", function(args)
+  dap.set_exception_breakpoints()
+end, {})
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
-  print(vim.api.nvim_exec("set cmdheight", true))
   vim.cmd [[set laststatus=3]]
-  print(vim.api.nvim_exec("set cmdheight", true))
   dapui.open()
 end
 
 vim.fn.sign_define('DapBreakpoint', {
-  text = '',
+  text = '●',
   texthl = 'DapBreakpoint',
   linehl = 'DapBreakpointLine',
   numhl = 'DapBreakpoint',
 })
 vim.fn.sign_define('DapBreakpointCondition', {
-  text = 'ﳁ',
+  text = '◆',
   texthl = 'DapLogPoint',
   linehl = 'DapLogPointLine',
   numhl = 'DapLogPoint',
@@ -130,11 +140,7 @@ dapui.setup({
       elements = {
         {
           id = "watches",
-          size = 0.5,
-        },
-        {
-          id = "console",
-          size = 0.5,
+          size = 1.0,
         },
       },
       position = "bottom",

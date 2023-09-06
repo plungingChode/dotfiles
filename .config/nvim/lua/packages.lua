@@ -18,22 +18,28 @@ return require("packer").startup(function(use)
       { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
       -- Autocompletion
-      { "hrsh7th/nvim-cmp" },     -- Required
-      { "hrsh7th/cmp-nvim-lsp" }, -- Required
-      { "L3MON4D3/LuaSnip" },     -- Required
-      { "j-hui/fidget.nvim" },    -- Optional, show loading
-      { "folke/neodev.nvim" },    -- Optional, nvim_* API docs
+      { "hrsh7th/nvim-cmp" },                                 -- Required
+      { "hrsh7th/cmp-nvim-lsp" },                             -- Required
+      { "L3MON4D3/LuaSnip" },                                 -- Required
+      { "j-hui/fidget.nvim",                tag = "legacy" }, -- Optional, show loading
+      { "folke/neodev.nvim" },                                -- Optional, nvim_* API docs
     }
   })
 
   -- Highlight, edit, and navigate code
   use({
     "nvim-treesitter/nvim-treesitter",
-    -- Typescript indentation is broken after this one, see 
+    -- Typescript indentation is broken after this one, see
     -- https://github.com/nvim-treesitter/nvim-treesitter/issues/4842
-    commit = "aa44e5fc5f301eb934698b04c71e65b44c21c4fe",
+    -- commit = "aa44e5fc5f301eb934698b04c71e65b44c21c4fe",
     run = function()
       pcall(require("nvim-treesitter.install").update { with_sync = true })
+      local fn = vim.fn
+      fn.system({
+        'cp',
+        fn.stdpath('config') .. '/treesitter-indent-works.lua',
+        fn.stdpath('config') .. '/site/pack/packer/start/nvim-treesitter/lua/nvim-treesitter/indent.lua'
+      })
     end,
     requires = {
       "JoosepAlviste/nvim-ts-context-commentstring",
@@ -45,7 +51,7 @@ return require("packer").startup(function(use)
     "tpope/vim-fugitive",
     after = "nvim-treesitter"
   })
-  use("tpope/vim-rhubarb")
+  -- use("tpope/vim-rhubarb")
   use("lewis6991/gitsigns.nvim")
 
   use("gbprod/nord.nvim")
@@ -94,5 +100,15 @@ return require("packer").startup(function(use)
     requires = { "mfussenegger/nvim-dap" }
   })
   use("ThePrimeagen/harpoon")
-  use("nvim-treesitter/playground")
+  -- use("nvim-treesitter/playground")
+  use("leoluz/nvim-dap-go")
+
+  use({
+    "klen/nvim-config-local",
+    config = function()
+      require('config-local').setup()
+    end
+  })
+
+  use("akinsho/flutter-tools.nvim")
 end)

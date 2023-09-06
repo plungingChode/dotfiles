@@ -18,6 +18,9 @@ treesitter.setup({
     "php",
     "jsdoc",
     "sql",
+    "go",
+    "css",
+    "kotlin",
   },
   highlight = {
     enable = true,
@@ -25,7 +28,14 @@ treesitter.setup({
   },
   indent = {
     enable = true,
-    disable = { "python", "yaml" }
+    disable = { 
+      "python", 
+      "yaml", 
+      "typescript",
+      "javascript",
+      "tsx",
+      "jsx",
+    },
   },
   -- required for JoosepAlviste/nvim-ts-context-commentstring
   context_commentstring = {
