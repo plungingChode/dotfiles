@@ -9,7 +9,6 @@ treesitter.setup({
     "astro",
     "typescript",
     "javascript",
-    "help",
     "vim",
     "svelte",
     "html",
@@ -26,11 +25,17 @@ treesitter.setup({
     enable = true,
     additional_vim_regex_highlighting = false,
   },
+  keymaps = {
+    init_selection = false,
+    node_incremental = false,
+    scope_incremental = false,
+    node_decremental = false,
+  },
   indent = {
     enable = true,
-    disable = { 
-      "python", 
-      "yaml", 
+    disable = {
+      "python",
+      "yaml",
       "typescript",
       "javascript",
       "tsx",

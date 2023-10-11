@@ -1,7 +1,21 @@
-require("indent_blankline").setup({
-  char = "│",
-  show_trailing_blankline_indent = false,
+local ibl = require("ibl")
+
+local highlight = {
+  "Whitespace"
+}
+
+ibl.setup({
+  indent = {
+    highlight = highlight,
+    char = "│"
+  },
+  scope = { enabled = false },
+  whitespace = {
+    highlight = highlight,
+    remove_blankline_trail = false,
+  }
 })
+
 
 -- Refresh indents afer the window was scrolled horizontally
 vim.api.nvim_create_augroup('IndentBlankLineFix', {})

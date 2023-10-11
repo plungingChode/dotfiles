@@ -95,6 +95,14 @@ local on_attach = function(client, bufnr)
     }
   )
 
+  local keymaps = vim.api.nvim_get_keymap("n")
+
+  for _, mapping in pairs(keymaps) do
+    if mapping['lhs'] == ' f' then
+      return
+    end
+  end
+
   if use_prettierd then
     vim.api.nvim_buf_create_user_command(
       bufnr, "Format", function()
@@ -104,14 +112,15 @@ local on_attach = function(client, bufnr)
       end,
       { desc = "Format current buffer with prettier" }
     )
+    map("n", "<leader>f", "mz:Format<CR>`z", "[F]ormat current buffer")
   else
     vim.api.nvim_buf_create_user_command(
       bufnr, "Format", function(_)
         vim.lsp.buf.format()
       end, { desc = "Format current buffer with LSP" }
     )
+    map("n", "<leader>f", ":Format<CR>", "[F]ormat current buffer")
   end
-  map("n", "<leader>f", "mz:Format<CR>`z", "[F]ormat current buffer")
 end
 
 lsp.on_attach(on_attach)

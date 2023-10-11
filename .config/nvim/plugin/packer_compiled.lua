@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/pszigeti/.cache/nvim/packer_hererocks/2.1.1692616192/share/lua/5.1/?.lua;/home/pszigeti/.cache/nvim/packer_hererocks/2.1.1692616192/share/lua/5.1/?/init.lua;/home/pszigeti/.cache/nvim/packer_hererocks/2.1.1692616192/lib/luarocks/rocks-5.1/?.lua;/home/pszigeti/.cache/nvim/packer_hererocks/2.1.1692616192/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/pszigeti/.cache/nvim/packer_hererocks/2.1.1692616192/lib/lua/5.1/?.so"
+local package_path_str = "/home/pszigeti/.cache/nvim/packer_hererocks/2.1.1694285958/share/lua/5.1/?.lua;/home/pszigeti/.cache/nvim/packer_hererocks/2.1.1694285958/share/lua/5.1/?/init.lua;/home/pszigeti/.cache/nvim/packer_hererocks/2.1.1694285958/lib/luarocks/rocks-5.1/?.lua;/home/pszigeti/.cache/nvim/packer_hererocks/2.1.1694285958/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/pszigeti/.cache/nvim/packer_hererocks/2.1.1694285958/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -93,11 +93,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/pszigeti/.local/share/nvim/site/pack/packer/start/fidget.nvim",
     url = "https://github.com/j-hui/fidget.nvim"
-  },
-  ["flutter-tools.nvim"] = {
-    loaded = true,
-    path = "/home/pszigeti/.local/share/nvim/site/pack/packer/start/flutter-tools.nvim",
-    url = "https://github.com/akinsho/flutter-tools.nvim"
   },
   ["gitsigns.nvim"] = {
     loaded = true,
@@ -175,6 +170,11 @@ _G.packer_plugins = {
     path = "/home/pszigeti/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
     url = "https://github.com/rcarriga/nvim-dap-ui"
   },
+  ["nvim-dap-vscode-js"] = {
+    loaded = true,
+    path = "/home/pszigeti/.local/share/nvim/site/pack/packer/start/nvim-dap-vscode-js",
+    url = "https://github.com/mxsdev/nvim-dap-vscode-js"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/pszigeti/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -230,10 +230,8 @@ _G.packer_plugins = {
     url = "https://github.com/mbbill/undotree"
   },
   ["vim-fugitive"] = {
-    load_after = {},
     loaded = true,
-    needs_bufread = true,
-    path = "/home/pszigeti/.local/share/nvim/site/pack/packer/opt/vim-fugitive",
+    path = "/home/pszigeti/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
   },
   ["vim-sleuth"] = {
@@ -266,11 +264,6 @@ time([[Config for zen-mode.nvim]], false)
 time([[Conditional loading of telescope-fzf-native.nvim]], true)
   require("packer.load")({"telescope-fzf-native.nvim"}, {}, _G.packer_plugins)
 time([[Conditional loading of telescope-fzf-native.nvim]], false)
--- Load plugins in order defined by `after`
-time([[Sequenced loading]], true)
-vim.cmd [[ packadd nvim-treesitter ]]
-vim.cmd [[ packadd vim-fugitive ]]
-time([[Sequenced loading]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

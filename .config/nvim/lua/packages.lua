@@ -18,11 +18,11 @@ return require("packer").startup(function(use)
       { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
       -- Autocompletion
-      { "hrsh7th/nvim-cmp" },                                 -- Required
-      { "hrsh7th/cmp-nvim-lsp" },                             -- Required
-      { "L3MON4D3/LuaSnip" },                                 -- Required
-      { "j-hui/fidget.nvim",                tag = "legacy" }, -- Optional, show loading
-      { "folke/neodev.nvim" },                                -- Optional, nvim_* API docs
+      { "hrsh7th/nvim-cmp" },                  -- Required
+      { "hrsh7th/cmp-nvim-lsp" },              -- Required
+      { "L3MON4D3/LuaSnip" },                  -- Required
+      { "j-hui/fidget.nvim", tag = "legacy" }, -- Optional, show loading
+      { "folke/neodev.nvim" },                 -- Optional, nvim_* API docs
     }
   })
 
@@ -47,10 +47,7 @@ return require("packer").startup(function(use)
   })
 
   -- Git related plugins
-  use({
-    "tpope/vim-fugitive",
-    after = "nvim-treesitter"
-  })
+  use("tpope/vim-fugitive")
   -- use("tpope/vim-rhubarb")
   use("lewis6991/gitsigns.nvim")
 
@@ -109,6 +106,10 @@ return require("packer").startup(function(use)
       require('config-local').setup()
     end
   })
+  use({
+    "mxsdev/nvim-dap-vscode-js",
+    requires = { "mfussenegger/nvim-dap" }
+  })
 
-  use("akinsho/flutter-tools.nvim")
+  -- use("akinsho/flutter-tools.nvim")
 end)
