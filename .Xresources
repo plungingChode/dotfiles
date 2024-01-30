@@ -30,7 +30,7 @@
 *.color15:       #FFFFFF
 
 !! Cursor theme
-Xcursor.theme: xcursor-oxygen
+Xcursor.theme: Nordzy-cursors
 
 !! Font rendering
 Xft.antialias: 1

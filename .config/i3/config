@@ -14,7 +14,15 @@ font pango:DejaVu Sans Mono 12
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:DejaVu Sans Mono 12
 
-client.focused #008080 #3498DB #FFFFFF #3498DB 
+# Theme colors
+# class                   border  backgr. text    indic.   child_border
+client.focused          #008080 #3498DB #FFFFFF #3498DB 
+client.focused_inactive #2F3D44 #2F3D44 #FFFFFF #454948
+client.unfocused        #2F3D44 #2F3D44 #FFFFFF #454948
+client.urgent           #CB4B16 #FDF6E3 #FFFFFF #268BD2
+client.placeholder      #000000 #0C0C0C #FFFFFF #000000 
+
+client.background       #2B2C2B
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -23,21 +31,24 @@ client.focused #008080 #3498DB #FFFFFF #3498DB
 # screen before suspend. Use loginctl lock-session to lock your screen.
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
+# Load autorandr profile
+exec --no-startup-id autorandr --change
+
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
 # Start policy agent
-exec --no-startup-id lxpolkit
+# exec --no-startup-id lxpolkit
 
 # Load background
-exec --no-startup-id nitrogen --restore &
+exec --no-startup-id nitrogen --restore; sleep 1; picom --daemon 
 
 # Start Flux (blue light filter after sundown)
-exec --no-startup-id xflux -l 47.497913 -g 19.040236
+# exec --no-startup-id xflux -l 47.497913 -g 19.040236
 
 # Start EasyEffects to enable audio equalizer
-exec --no-startup-id easyeffects --gapplication-service
+# exec --no-startup-id easyeffects --gapplication-service
 
 # Watch volume/audio device changes and update the status bar
 exec --no-startup-id ~/scripts/volumed
@@ -53,7 +64,10 @@ bindsym $mod+space exec ~/scripts/toggle-keyboard-layout && pkill -RTMIN+10 i3bl
 # no window titles
 # new_window 1pixel
 for_window [class="^.*"] border pixel 2
-# gaps inner 5
+gaps inner 5
+# gaps outer 5
+smart_gaps on
+# smart_borders on
 
 # default app locations
 for_window [class="Spotify"] move to workspace $ws9

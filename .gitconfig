@@ -27,3 +27,4 @@
 [diff]
     colorMoved = default
     noprefix = true
+    tool = nvimdiff
