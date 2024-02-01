@@ -14,7 +14,7 @@ lsp = lsp.preset({
 })
 
 -- Loading spinner
-require("fidget").setup()
+-- require("fidget").setup()
 -- nvim API types
 require("neodev").setup()
 
@@ -162,7 +162,9 @@ cmp.setup({
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
     }),
-    ["<Tab>"] = cmp_action.tab_complete()
+    ["<Tab>"] = cmp_action.tab_complete(),
+    ["<C-n>"] = cmp_action.luasnip_jump_forward(),
+    ["<C-p>"] = cmp_action.luasnip_jump_backward(),
   },
   sources = {
     { name = "nvim_lsp" },
@@ -190,3 +192,12 @@ lsp.setup()
 vim.diagnostic.config({
   virtual_text = false
 })
+
+-- Set max width of hover documentation
+-- https://neovim.discourse.group/t/3276
+local orig_open_floating_preview = vim.lsp.util.open_floating_preview
+vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.max_width = opts.max_width or 80
+  return orig_open_floating_preview(contents, syntax, opts, ...)
+end

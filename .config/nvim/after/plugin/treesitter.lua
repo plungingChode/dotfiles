@@ -23,6 +23,12 @@ treesitter.setup({
     "go",
     "css",
     "kotlin",
+    "twig",
+    "markdown",
+    "markdown_inline",
+    "bash",
+    "fish",
+    "regex",
   },
   highlight = {
     enable = true,

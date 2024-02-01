@@ -18,11 +18,12 @@ return require("packer").startup(function(use)
       { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
       -- Autocompletion
-      { "hrsh7th/nvim-cmp" },                  -- Required
-      { "hrsh7th/cmp-nvim-lsp" },              -- Required
-      { "L3MON4D3/LuaSnip" },                  -- Required
-      { "j-hui/fidget.nvim", tag = "legacy" }, -- Optional, show loading
-      { "folke/neodev.nvim" },                 -- Optional, nvim_* API docs
+      { "hrsh7th/nvim-cmp" },     -- Required
+      { "hrsh7th/cmp-nvim-lsp" }, -- Required
+      { "L3MON4D3/LuaSnip" },     -- Required
+      { 'saadparwaiz1/cmp_luasnip' },
+      { "j-hui/fidget.nvim", },   -- Optional, show loading
+      { "folke/neodev.nvim" },    -- Optional, nvim_* API docs
     }
   })
 
@@ -96,7 +97,10 @@ return require("packer").startup(function(use)
     "rcarriga/nvim-dap-ui",
     requires = { "mfussenegger/nvim-dap" }
   })
-  use("ThePrimeagen/harpoon")
+  use({
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2"
+  })
   -- use("nvim-treesitter/playground")
   use("leoluz/nvim-dap-go")
 
@@ -111,5 +115,7 @@ return require("packer").startup(function(use)
     requires = { "mfussenegger/nvim-dap" }
   })
 
+  use({ "MunifTanjim/nui.nvim" })
+  use({ "folke/noice.nvim" })
   -- use("akinsho/flutter-tools.nvim")
 end)
