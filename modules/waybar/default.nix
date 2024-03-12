@@ -1,0 +1,89 @@
+{
+  programs.waybar = {
+    enable = true;
+    style = ./style.css;
+    settings = {
+      mainBar = {
+        height = 30;
+        layer = "top";
+        position = "bottom";
+
+        modules-left = [
+          "hyprland/workspaces"
+            "hyprland/window"
+        ];
+
+        modules-right = [
+          "hyprland/language" 
+            "cpu"
+            "memory"
+            "pulseaudio"
+            "battery"
+            "clock"
+            "tray"
+        ];
+
+        "hyprland/window" = {
+          max-length = 200;
+          separate-outputs = true;
+        };
+
+        pulseaudio = {
+          format = "{icon} {volume}%";
+          format-bluetooth = "{volume}% {icon}";
+          format-muted = "󰝟 {volume}%";
+          format-icons = {
+            headphone = " ";
+            hands-free = " ";
+            headset = " ";
+            phone = "";
+            portable = "";
+            car = " ";
+            default = ["" ""];
+          };        
+          scroll-step = 1;
+          on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+          ignored-sinks = ["Easy Effects Sink"];
+        };
+
+        "hyprland/language" = {
+          format = "  {}";
+          format-en = "GB";
+          format-hu = "HU";
+        };
+
+        clock = {
+          format = "{:%Y.%m.%d %H:%M}";
+        };
+
+        battery = {
+          interval = 60;
+          states = {
+            full = 100;
+            warning = 30;
+            critical = 15;
+          };        
+          format-icons = ["󱊡" "󱊡" "󱊢" "󱊢" "󱊣"];
+          format-discharging = "{icon} {capacity}%";
+          format-charging = "<span color='#ebcb8b'></span> {capacity}%";
+          format-full = "<span></span> {capacity}%";
+          max-length = 25;
+        };
+
+        cpu = {
+          format = "  {usage}%";
+          states = {
+            high = 60;
+            veryhigh = 85;
+          };      
+        };
+
+        memory = {
+          interval = 10;
+          # https://fontawesome.com/icons/memory
+          format = " {used} GB";
+        };    
+      };
+    };
+  };
+}

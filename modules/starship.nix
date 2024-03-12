@@ -1,0 +1,35 @@
+{
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+    enableTransience = true;
+    settings = {
+      format = "$username$directory[(\\($git_branch$git_commit( $git_status)\\))](fg:cyan)\n$character";
+      character = {
+        success_symbol = "\[\\$\](green)";
+        error_symbol = "\[\\$\](red)";
+      };
+      directory = {
+        truncate_to_repo = false;
+        format = "[$path]($style) [$read_only]($read_only_style)";
+        style = "none";
+        read_only = "";
+      };
+      git_branch = {
+        format = "[$branch]($style)";
+        style = "fg:cyan";
+      };
+      git_commit = {
+        format = " [$tag]";
+        tag_symbol = "";
+      };
+      git_status = {
+        format = "[$all_status$ahead_behind](bold fg:cyan)";
+        deleted = "D";
+        modified = "M";
+        renamed = "R";
+        untracked = "U";
+      };
+    };
+  };
+}
