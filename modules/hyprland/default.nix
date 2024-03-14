@@ -1,26 +1,17 @@
-{ pkgs, ... }:
+{ pkgs, lib, specialArgs, ... }:
+
+with specialArgs;
 
 let 
-  bemenuOptions = builtins.replaceStrings ["\n"] [" "] ''
-    --fn 'FiraCode Nerd Font 14'
-    --bottom
-    --hp 10
-    --line-height 30
-    --tb '##2b303b'
-    --tf '##81a1c1'
-    --fb '##2b303b'
-    --ff '##eceff4'
-    --sb '##2b303b'
-    --sf '##eceff4'
-    --nb '##2b303b'
-    --nf '##eceff4'
-    --ab '##2b303b'
-    --af '##eceff4'
-    --hb '##2b303b'
-    --hf '##81a1c1' 
-  '';
+  bemenuOptions = lib.mapAttrs (name: value: 
+    if builtins.isString value then 
+      # Escape hashes
+      builtins.replaceStrings ["#"] ["##"] value
+    else 
+      value
+  ) bemenuDefaults;
 
-  scriptLib = ./lib.sh;
+  scriptLibPath = ./lib.sh;
   changeVolume = ./volume.sh;
   changeBrightness = ./brightness.sh;
 in
@@ -32,15 +23,18 @@ in
     settings = {
       monitor = " , highres, auto, 1";
       env = [
-        "XCURSOR_SIZE, 24"
-        "HYPRLAND_SCRIPT_LIB, ${scriptLib}"
+        "HYPRLAND_SCRIPT_LIB, ${scriptLibPath}"
+        "BEMENU_OPTS, ${attrsToCliArgs bemenuOptions}"
+        "XCURSOR_SIZE, 32"
+        "XCURSOR_THEME, capitaine-cursors"
       ];
       input = {
         kb_layout = "gb,hu";
         # Toggle keyboard layout on Win + Space
         # Caps Lock is another Escape
         kb_options = "grp:win_space_toggle, caps:escape";
-        follow_mouse = 0;
+        follow_mouse = 2;
+        float_switch_override_focus = 0;
         touchpad = {
           natural_scroll = false;
           scroll_factor = 0.2;
@@ -67,6 +61,11 @@ in
         preserve_split = true; # you probably want this
       };
 
+      decoration = {
+        drop_shadow = false;
+        blur.enabled = false;
+      };
+
       master = {
           # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
           new_is_master = false;
@@ -82,16 +81,26 @@ in
           force_default_wallpaper = 0;
       };
 
+      windowrulev2 = [
+        "float, class:(nm-connection-editor)"
+
+        "float, class:(thunar)"
+        "size 70% 70%, class:(thunar)"
+        "center, class:(thunar)"
+
+        "float, class:(gcolor3)"
+      ];
+
       "$mod" = "SUPER";
       bind = [
         # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
         "$mod, Return, exec, alacritty"
-        # "$mod SHIFT, Return, exec, alacritty --working-directory $(pwd)"
+        "$mod SHIFT, Return, exec, alacritty --working-directory $(pwd)"
         "$mod SHIFT, Q, killactive, "
         "$mod, M, exit, "
         "$mod, E, exec, dolphin"
         "$mod SHIFT, F, togglefloating, "
-        "$mod, R, exec, bemenu-run ${bemenuOptions}"
+        "$mod, D, exec, bemenu-run"
         "$mod, P, pseudo, # dwindle"
         "$mod, V, togglesplit, # dwindle"
         "$mod, F, fullscreen "
@@ -139,6 +148,9 @@ in
         "$mod, mouse_down, workspace, e+1"
         "$mod, mouse_up, workspace, e-1"
         
+        # Screenshots
+        "    , Print, exec, grim"
+        "$mod, Print, exec, grim -g \"$(slurp -d)\" - | wl-copy"
 
       ];
 
@@ -169,6 +181,7 @@ in
 
     extraConfig = ''
       exec-once = ${pkgs.waybar}/bin/waybar & hyprpaper
+      exec-once = hyprctl setcursor capitaine-cursors 32
 
       animations {
         enabled = yes

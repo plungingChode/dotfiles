@@ -20,8 +20,9 @@
         style = "fg:cyan";
       };
       git_commit = {
-        format = " [$tag]";
+        format = "($hash$tag)";
         tag_symbol = "";
+        tag_disabled = false;
       };
       git_status = {
         format = "[$all_status$ahead_behind](bold fg:cyan)";

@@ -17,7 +17,7 @@
           "hyprland/language" 
             "cpu"
             "memory"
-            "pulseaudio"
+            "wireplumber"
             "battery"
             "clock"
             "tray"
@@ -28,21 +28,22 @@
           separate-outputs = true;
         };
 
-        pulseaudio = {
+        wireplumber = {
           format = "{icon} {volume}%";
           format-bluetooth = "{volume}% {icon}";
           format-muted = "󰝟 {volume}%";
           format-icons = {
-            headphone = " ";
-            hands-free = " ";
-            headset = " ";
+            headphone = "";
+            hands-free = "";
+            headset = "";
             phone = "";
             portable = "";
             car = " ";
             default = ["" ""];
           };        
           scroll-step = 1;
-          on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+          max-volume = 150;
+          on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           ignored-sinks = ["Easy Effects Sink"];
         };
 
