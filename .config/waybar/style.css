@@ -1,0 +1,152 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: FiraCode Nerd Font;
+    font-size: 16px;
+}
+
+/* Bar */
+
+window#waybar {
+    background-color: rgba(43, 48, 59, 0.8);
+    /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+
+/* Hyprland window title */
+
+#window {
+    margin: 0 4px;
+}
+
+/* Button */
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces {
+    /* Make sure there's  enough space for 9 workspaces before the window title */
+    min-width: 300px;
+}
+
+#workspaces button {
+    padding: 0 4px;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+#workspaces button label {
+    font-size: 16px;
+    padding: 0 5px;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.active {
+    background: #586b7f;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces button.focused {
+    background-color: #64727D;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+    box-shadow: inset 0 -3px #ff0000;
+}
+
+/* Modules */
+
+#wireplumber {
+    color: #ffffff;
+    padding: 0 10px;
+}
+
+#wireplumber.muted {
+    color: #6f6f6f;
+}
+
+#language {
+    padding: 0 10px;
+    min-width: 16px;
+}
+
+#clock {
+    padding: 0 10px;
+}
+
+#battery {
+    font-size: 16px;
+    padding: 0 10px;
+    color: #ffffff;
+}
+
+#battery.charging, #battery.plugged {
+    color: #ffffff;
+}
+
+#battery.warning:not(.charging) {
+    color: #ebcb8b;
+}
+
+@keyframes blink {
+    to {
+        background-color: #eb4d4b;
+    }
+}
+
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging)  {
+    background-color: #f07a79;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#memory {
+    padding: 0 10px;
+    /* background-color: #9b59b6; */
+}
+
+#cpu {
+    padding: 0 10px;
+}
+
+#tray {
+    padding: 0 10px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
+

@@ -6,6 +6,12 @@ local telescope = require("telescope.builtin")
 
 local cmp_action = lsp.cmp_action()
 
+-- require("mason-lspconfig").setup({
+--   ensure_installed = {
+--     "lua_ls"
+--   }
+-- });
+
 lsp = lsp.preset({
   float_border = "none",
   manage_nvim_cmp = {
@@ -13,11 +19,8 @@ lsp = lsp.preset({
   }
 })
 
--- Loading spinner
--- require("fidget").setup()
 -- nvim API types
 require("neodev").setup()
-
 
 lsp.configure("lua_ls", {
   settings = {

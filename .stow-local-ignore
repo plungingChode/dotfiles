@@ -1,0 +1,8 @@
+links.*
+.git
+.gitignore
+.ignore
+
+postInstall.sh
+pacman.conf
+pacman.conf.bak

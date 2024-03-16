@@ -115,7 +115,12 @@ return require("packer").startup(function(use)
     requires = { "mfussenegger/nvim-dap" }
   })
 
-  use({ "MunifTanjim/nui.nvim" })
-  use({ "folke/noice.nvim" })
   -- use("akinsho/flutter-tools.nvim")
+  use({
+    "stevearc/oil.nvim",
+    requires = {
+      "nvim-tree/nvim-web-devicons",
+      "chrishrb/gx.nvim"
+    },
+  });
 end)

@@ -1,24 +1,21 @@
-if status is-interactive
-    # Disable greeting message
-    set --universal fish_greeting
+# Disable greeting message
+set --universal fish_greeting
 
-    # Use icons in alacritty
-    if test "$TERM" = "alacritty"
-        alias ls="exa --icons"
-    end
+# Use icons in alacritty
+alias eza="eza --icons"
+alias l="eza --classify"
+alias la="eza --all"
+alias ll="eza --long"
+alias ls="eza"
 
-    alias ll="ls --long"
-    alias la="ls --all"
-    
-    alias cp="cp -i"
-    alias flux='xflux -l 47.497913 -g 19.040236'
-    alias config-git='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-    alias hx="helix"
-    alias clip="xclip -selection clipboard"
-    alias vimdiff="nvim -d"
+alias cp="cp -i"
+alias vi="nvim"
+alias vim="nvim"
+alias vimdiff="nvim -d"
 
-    nvm --silent use 16
-end
+# abbr docc docker 
+
+#nvm --silent use 16
 
 set --export VISUAL "nvim"
 set --export EDITOR "nvim"
@@ -27,7 +24,7 @@ set --export BAT_THEME "Nord"
 set --export DENO_INSTALL "$HOME/.deno"
 set --export PATH_TO_FX "/usr/lib/jvm/java-11-openjfx/"
 set --export ANDROID_HOME "$HOME/Android/Sdk"
-set --export MANPAGER "less --RAW-CONTROL-CHARS --use-color -Dd+r -Du+b"
+set --export MANPAGER "bat --plain"
 set --export PNPM_HOME "$HOME/.local/share/pnpm"
 set --export SCRIPTS "$HOME/scripts"
 set --export GOPATH "$HOME/.cache/yay/docker-git/src/go"
@@ -38,24 +35,19 @@ set --export PATH "$PATH:/usr/lib/jvm/java-17-openjdk/bin/"
 set --export PATH "$PATH:$HOME/.local/share/flutter/bin/"
 set --export PATH "$PATH:$HOME/.local/share/cmdline-tools/bin/"
 set --export PATH "$PATH:$HOME/.local/share/cmdline-tools/bin/"
+set --export HELLO "world"
 
-sh "$HOME/.cargo/env"
+# sh "$HOME/.cargo/env"
 
-function fish_prompt
-    set --local git_branch (git branch 2> /dev/null | sed -n '/\* /s///p')
-    set --local cwd (pwd | sed s#^$HOME#~#)
-    echo -ne "\n$cwd"
-    if test -n "$git_branch"
-        set_color cyan
-        echo -n " ($git_branch)"
-        set_color normal
-    end
-    set_color green
-    echo -ne '\n$ '
-    set_color normal
-end
-
+# Print full path as title
 function fish_title
     set --local cwd (pwd | sed s#^$HOME#~#)
-    echo $cwd
+    echo "$cwd — fish"
 end
+
+# Prompt
+function starship_transient_prompt_func
+  starship module character
+end
+starship init fish | source
+enable_transience

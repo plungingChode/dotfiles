@@ -1,0 +1,344 @@
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term alacritty
+set $menu bemenu-run
+
+set $cursor-theme capitaine-cursors
+set $cursor-size 32
+set $gtk-theme Nordic
+set $icon-theme Papirus-Dark-Maia
+set $term-font FiraCode Nerd Font
+set $gui-font Open Sans
+
+
+# TODO modes (resize, shutdown, etc.)
+# TODO brightness controls
+# TODO volume controls
+# TODO scaling?
+# TODO mic mute?
+
+# TODO clipboard history?
+# TODO rofi theme?
+# set $clipboard cliphist list | rofi -dmenu -font "$gui-font" -p "Select item to copy" -lines 10 | cliphist decode | wl-copy
+# set $clipboard-del cliphist list | rofi -dmenu -font "$gui-font" -p "Select item to delete" -lines 10 | cliphist delete
+# set $cliphist_store '[ -x "$(command -v wl-paste)" ] && [ -x "$(command -v cliphist)" ] && wl-paste --watch cliphist store'
+# set $clip-persist '[ -x "$(command -v wl-clip-persist)" ] && pkill -x wl-clip-persist; wl-clip-persist --clipboard regular'
+
+# TODO lockscreen?
+# set $locking swaylock --daemonize --color "$selection-color" --inside-color "$selection-color" --inside-clear-color "$text-color" --ring-color "$color2" --ring-clear-color "$color11" --ring-ver-color "$color13" --show-failed-attempts --fade-in 0.2 --grace 2 --effect-vignette 0.5:0.5 --effect-blur 7x5 --ignore-empty-password --screenshots --clock
+
+# TODO bluetooth menu?
+# set $once /usr/share/sway/scripts/once.sh
+# set $bluetooth $once $term_float bluetuith
+
+# TODO autostart applications
+
+# TODO calendar application?
+# set $calendar $once $term_float calcurse
+
+# TODO screenshots
+# TODO notify on screenshot (copied to clipboard, etc.)
+# set $grimshot grimshot
+# set $pipe_output $grimshot save output -
+# set $pipe_selection $grimshot save area -
+# set $notify_paste [[ $(wl-paste -l) == "image/png" ]] && notify-send "Screenshot copied to clipboard"
+# set $swappy swappy -f -
+# set $swappy_pipe swappy -f - -o -
+# set $upload_pipe curl -s -F "file=@-;filename=.png" https://x0.at/ | tee >(wl-copy) >(xargs notify-send)
+#
+# set $screenshot_screen $pipe_output | $swappy && $notify_paste
+# set $screenshot_screen_upload $pipe_output | $swappy_pipe | $upload_pipe
+#
+# set $screenshot_selection $pipe_selection | $swappy && $notify_paste
+# set $screenshot_selection_upload $pipe_selection | $swappy_pipe | $upload_pipe
+
+# TODO wlsunset (redshift)
+# TODO autotiling 
+exec autotiling-rs
+# set $autotiling '[ -x "$(command -v autotiling)" ] && autotiling || [ -x "$(command -v autotiling-rs)" ] && autotiling-rs'
+
+# TODO mounting daemon?
+
+# TODO display daemon
+# set $way_displays '[ -x "$(command -v way-displays)" ] && systemctl --now --user enable way-displays'
+
+# TODO start nm-applet
+# set $nm_applet '[ -x "$(command -v nm-applet)" ] && pkill -x nm-applet && dbus-launch nm-applet'
+
+# TODO start mako
+# set $mako '[ -x "$(command -v mako)" ] && pkill -x mako; /usr/share/sway/scripts/mako.sh --font "$term-font" --text-color "$text-color" --border-color "$accent-color" --background-color "$background-color" --border-size 3 --width 400 --height 200 --padding 20 --margin 20 --default-timeout 15000'
+
+input type:keyboard { 
+    # TODO switch on win+space
+    xkb_layout gb,hu
+}
+
+# TODO cursor theme https://old.reddit.com/r/swaywm/comments/qq74gv/how_do_i_set_correctly_the_cursor_theme/
+# TODO icon theme
+# TODO gtk theme
+
+# Disable mouse acceleration
+input type:pointer {
+    accel_profile flat
+    pointer_accel 0.5
+}
+
+# Wallpaper
+output * background ~/Pictures/eagle-nebula.jpg fill
+
+# Start a terminal
+bindsym $mod+Return exec $term
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Start your launcher
+bindsym $mod+d exec $menu
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+# Move your focus around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+# Or use $mod+[up|down|left|right]
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+# Ditto, with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1; workspace 1
+bindsym $mod+Shift+2 move container to workspace number 2; workspace 2
+bindsym $mod+Shift+3 move container to workspace number 3; workspace 3
+bindsym $mod+Shift+4 move container to workspace number 4; workspace 4
+bindsym $mod+Shift+5 move container to workspace number 5; workspace 5
+bindsym $mod+Shift+6 move container to workspace number 6; workspace 6
+bindsym $mod+Shift+7 move container to workspace number 7; workspace 7
+bindsym $mod+Shift+8 move container to workspace number 8; workspace 8
+bindsym $mod+Shift+9 move container to workspace number 9; workspace 9
+bindsym $mod+Shift+0 move container to workspace number 10; workspace 10
+# Note: workspaces can have any name you want, not just numbers.
+# We just use 1-10 as the default.
+
+# You can "split" the current object of your focus with
+# $mod+b or $mod+v, for horizontal and vertical splits
+# respectively.
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
+
+# Move focus to the parent container
+bindsym $mod+a focus parent
+
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
+
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+#
+# Status Bar:
+# Read `man 5 sway-bar` for more information about this section.
+# bar {
+#     position top
+#
+#     # When the status_command prints a new line to stdout, swaybar updates.
+#     # The default just shows the current date and time.
+#     status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+#
+#     colors {
+#         statusline #ffffff
+#         background #323232
+#         inactive_workspace #32323200 #32323200 #5c5c5c
+#     }
+# }
+
+### Manjaro default config (manjaro-sway-settings)
+# Import variables set-up by sway into the environment and notify systemd that
+# sway is ready.
+exec test -n "$$NOTIFY_SOCKET" \
+    && systemctl --user set-environment \
+        XDG_CURRENT_DESKTOP=sway \
+        XCURSOR_THEME=$cursor-theme \
+        XCURSOR_SIZE=$cursor-size \
+    && systemctl --user import-environment \
+        SWAYSOCK \
+        DISPLAY \
+        I3SOCK \
+        WAYLAND_DISPLAY \
+        XCURSOR_SIZE \
+        XCURSOR_THEME \
+        XDG_CURRENT_DESKTOP \
+    && systemd-notify --ready
+
+# ???
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd \
+        DISPLAY \
+        SWAYSOCK \
+        XDG_CURRENT_DESKTOP=sway \
+        WAYLAND_DISPLAY
+
+# Status bar
+# exec systemctl --user enable --now waybar
+exec waybar
+# Authentication agent
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+# 
+exec nm-applet
+
+# TODO set these manually in `gtkrc`s
+set $gtk-set gsettings set org.gnome.desktop.interface
+exec_always {
+  # /usr/share/sway/scripts/enable-gtk-theme.sh "$gtk-theme"
+  $gtk-set gtk-theme "$gtk-theme"
+  $gtk-set icon-theme "$icon-theme"
+  $gtk-set cursor-theme "$cursor-theme"
+  $gtk-set cursor-size $cursor-size
+  $gtk-set font-name "$gui-font 13"
+  $gtk-set monospace-font-name "$term-font 14"
+  $gtk-set color-scheme "prefer-dark"
+  gsettings set org.gnome.desktop.input-sources show-all-sources true
+  # /usr/share/sway/scripts/fontconfig.sh "monospace" "$term-font"
+
+  # gsettings set org.freedesktop.appearance color-scheme "$gtk-color-scheme"
+  # gsettings set org.gnome.desktop.interface color-scheme "$gtk-color-scheme"
+
+  # make sure gtk-4.0 has the theme settings of the currently active theme
+  # kvantummanager --set "$kvantum-theme"
+  # killall waybar; waybar
+}
+
+### Appearance
+gaps outer 5
+gaps inner 5
+# don't show gaps if there's only one window on the desktop
+smart_gaps on
+
+default_border pixel 2
+
+# TODO other options
+
+# set floating mode for generated windows
+for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
+for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 60 ppt 70 ppt
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+
+# set floating mode for specific applications
+for_window [instance="lxappearance"] floating enable
+for_window [app_id="pamac-manager"] floating enable
+for_window [app_id="blueberry.py"] floating enable
+for_window [app_id="dragon-drop"] floating enable, sticky enable
+for_window [app_id="firefox" title="^Library$"] floating enable, border pixel 1, sticky enable
+for_window [app_id="thunderbird" title=".*Reminder"] floating enable
+for_window [app_id="floating_shell"] floating enable, border pixel 1, sticky enable
+# for_window [app_id="Manjaro.manjaro-settings-manager"] floating enable
+for_window [app_id="" title="Picture in picture"] floating enable, sticky enable
+for_window [app_id="" title="Picture-in-Picture"] floating enable, sticky enable
+for_window [instance="around"] floating enable, sticky enable
+for_window [app_id="xsensors"] floating enable
+for_window [title="Save File"] floating enable
+for_window [title="Firefox .*— Sharing Indicator"] floating enable, sticky enable, move to scratchpad
+for_window [app_id="" title=".* is sharing your screen."] floating enable
+for_window [title="^wlay$"] floating enable
+
+for_window [app_id="thunar"] floating enable, resize set 70 ppt 70 ppt
+for_window [app_id="nm-connection-editor"] floating enable, resize set 30 ppt 70 ppt
+
+# Don't allow applications to inhibit shortcuts, i.e. grab total control of the
+# keyboard. Chrome currently abuses this by enabling it for all "--app=..."
+# shortcuts.
+seat * shortcuts_inhibitor disable
+seat * xcursor_theme $cursor-theme $cursor-size
+
+# hide cursor after 5 seconds of inactivty
+# seat seat0 hide_cursor 5000
+

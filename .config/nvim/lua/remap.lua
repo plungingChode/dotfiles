@@ -1,5 +1,9 @@
--- Open Netrw
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- Open file browser
+-- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>")
+
+-- Override default gx
+vim.keymap.set("n", "gx", "<CMD>Browse<CR>")
 
 -- Move selected lines
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
