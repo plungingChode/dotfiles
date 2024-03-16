@@ -13,9 +13,9 @@
   "modules-right": [
     // "sway/language",
     "hyprland/language",
+    "wireplumber",
     "cpu",
     "memory",
-    "wireplumber",
     "battery",
     "clock",
     "tray"
