@@ -4,6 +4,7 @@ vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>")
 
 -- Override default gx
 vim.keymap.set("n", "gx", "<CMD>Browse<CR>")
+vim.keymap.set("x", "gx", "<CMD>Browse<CR>")
 
 -- Move selected lines
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")

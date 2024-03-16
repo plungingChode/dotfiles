@@ -1,4 +1,4 @@
 /* TODO */
-window.thunar paned > scrolledwindow treeview.view:hover {
-  /* font-family: "FiraCode Nerd Font" */
+.thunar, .nm-connection-editor {
+  font-family: "FiraCode Nerd Font"
 }

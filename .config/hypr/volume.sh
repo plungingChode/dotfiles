@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ./lib.sh
+source $HYPRLAND_CONFIG_DIR/lib.sh
 
 volume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d' ' -f2)
 volume=$(bc <<< "scale=0; ${volume}*100/1")

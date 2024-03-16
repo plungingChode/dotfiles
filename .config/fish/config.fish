@@ -13,37 +13,16 @@ alias vi="nvim"
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
-# abbr docc docker 
+# Abbreviations
+abbr --add --position command docc "docker compose"
 
-#nvm --silent use 16
-
-set --export VISUAL "nvim"
-set --export EDITOR "nvim"
-set --export BROWSER "firefox-developer-edition"
-set --export BAT_THEME "Nord"
-set --export DENO_INSTALL "$HOME/.deno"
-set --export PATH_TO_FX "/usr/lib/jvm/java-11-openjfx/"
-set --export ANDROID_HOME "$HOME/Android/Sdk"
-set --export MANPAGER "bat --plain"
-set --export PNPM_HOME "$HOME/.local/share/pnpm"
-set --export SCRIPTS "$HOME/scripts"
-set --export GOPATH "$HOME/.cache/yay/docker-git/src/go"
-
-set --export PATH "$ANDROID_HOME/platform_tools:$DENO_INSTALL/bin:$SCRIPTS:$PNPM_HOME:$PATH"
-# set --export PATH "$PATH:/usr/lib/jvm/java-8-openjdk/jre/bin/"
-set --export PATH "$PATH:/usr/lib/jvm/java-17-openjdk/bin/"
-set --export PATH "$PATH:$HOME/.local/share/flutter/bin/"
-set --export PATH "$PATH:$HOME/.local/share/cmdline-tools/bin/"
-set --export PATH "$PATH:$HOME/.local/share/cmdline-tools/bin/"
-set --export HELLO "world"
-
-# sh "$HOME/.cargo/env"
+# nvm --silent use 16
 
 # Print full path as title
-function fish_title
-    set --local cwd (pwd | sed s#^$HOME#~#)
-    echo "$cwd — fish"
-end
+# function fish_title
+#     set --local cwd (pwd | sed s#^$HOME#~#)
+#     echo "$cwd — fish"
+# end
 
 # Prompt
 function starship_transient_prompt_func
@@ -51,3 +30,5 @@ function starship_transient_prompt_func
 end
 starship init fish | source
 enable_transience
+
+fish_vi_key_bindings

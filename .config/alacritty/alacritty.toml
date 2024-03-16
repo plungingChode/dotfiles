@@ -1,3 +1,25 @@
+[font]
+size = 12
+
+[font.normal]
+family = "FiraCode Nerd Font"
+
+[keyboard]
+bindings = [
+    { action = "SpawnNewInstance",  key = "Return", mods = "Shift|Super" },
+    { action = "Last", key = 5, mode = "Vi|~Search", mods = "Shift" },
+    { action = "First", key = 7, mode = "Vi|~Search", mods = "Shift" },
+    { chars = "\u001B[15;4~", key = "F5", mods = "Shift" },
+    { chars = "\u001B[15;6;5~", key = "F5", mods = "Control|Shift" },
+    { chars = "source ~/scripts/open-project.fish\n", key = "F", mods = "Control" }
+]
+
+[window]
+dynamic_padding = true
+
+# [window.padding]
+# y = 5
+
 [colors.bright]
 black = "#4c566a"
 blue = "#81a1c1"
@@ -53,24 +75,4 @@ text = "CellForeground"
 cursor = "#d8dee9"
 text = "#2e3440"
 
-[font]
-size = 13
 
-[font.normal]
-family = "FiraCode Nerd Font"
-
-[keyboard]
-bindings = [
-    { action = "SpawnNewInstance",  key = "Return", mods = "Shift|Super" },
-    { action = "Last", key = 5, mode = "Vi|~Search", mods = "Shift" },
-    { action = "First", key = 7, mode = "Vi|~Search", mods = "Shift" },
-    { chars = "\u001B[15;4~", key = "F5", mods = "Shift" },
-    { chars = "\u001B[15;6;5~", key = "F5", mods = "Control|Shift" },
-    { chars = "source ~/scripts/open-project.fish\n", key = "F", mods = "Control" }
-]
-
-[window]
-dynamic_padding = true
-
-[window.padding]
-y = 5

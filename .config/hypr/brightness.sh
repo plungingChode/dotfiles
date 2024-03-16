@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ./lib.sh
+source $HYPRLAND_CONFIG_DIR/lib.sh
 
 current=$(brightnessctl get)
 max=$(brightnessctl max)

@@ -1,7 +1,7 @@
 {
-  "height": 25,
+  "height": 28,
   "layer": "top",
-  "position": "bottom",
+  "position": "top",
 
   "modules-left": [
     // "sway/workspaces",
@@ -90,8 +90,12 @@
 
   "memory": {
     "interval": 10,
-    "format": " {used} GB"
-  }    
+    "format": " {used:0.2f} GB"
+  },
+
+  "tray": {
+    "spacing": 10
+  }
 }
 
 // vim: filetype=jsonc
