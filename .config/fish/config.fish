@@ -16,13 +16,11 @@ alias vimdiff="nvim -d"
 # Abbreviations
 abbr --add --position command docc "docker compose"
 
-# nvm --silent use 16
+# Accept autosuggestions in vi mode with Ctrl + S
+bind --mode insert \cs "accept-autosuggestion"
+bind \cs "accept-autosuggestion"
 
-# Print full path as title
-# function fish_title
-#     set --local cwd (pwd | sed s#^$HOME#~#)
-#     echo "$cwd — fish"
-# end
+# nvm --silent use 16
 
 # Prompt
 function starship_transient_prompt_func

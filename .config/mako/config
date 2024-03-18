@@ -1,0 +1,22 @@
+font=monospace 11
+default-timeout=10000
+icons=0
+# ignore-timeout=1
+
+layer=top
+background-color=#373e4ddd
+text-color=#e5e9f0
+border-color=#373e4d80
+border-radius=5
+anchor=top-right
+margin=20
+padding=5,10,5,10
+width=400
+height=100
+progress-color=#586b7f
+
+[urgency=critical]
+background-color=#94545ddd
+border-color=#94545ddd
+
+# vim: set filetype=dosini

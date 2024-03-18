@@ -2,6 +2,7 @@ vim.bo.textwidth = 80
 
 local config = require("nvim-surround.config")
 
+-- TODO make sure these don't apply to other buffers!
 require("nvim-surround").setup({
   surrounds = {
     -- (S)trong, bold

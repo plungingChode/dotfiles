@@ -89,6 +89,17 @@ input type:pointer {
     pointer_accel 0.5
 }
 
+input type:touchpad {
+    dwt enabled
+    tap enabled
+    middle_emulation enabled
+}
+
+output eDP-1 mode 1920x1080@60Hz
+output eDP-1 scale 1.25
+
+output HDMI-A-1 mode 1920x1080@60Hz
+output HDMI-A-1 scale 1.25
 # Wallpaper
 output * background ~/Pictures/eagle-nebula.jpg fill
 
@@ -278,8 +289,8 @@ exec_always {
   $gtk-set icon-theme "$icon-theme"
   $gtk-set cursor-theme "$cursor-theme"
   $gtk-set cursor-size $cursor-size
-  $gtk-set font-name "$gui-font 13"
-  $gtk-set monospace-font-name "$term-font 14"
+  $gtk-set font-name "$gui-font 10"
+  $gtk-set monospace-font-name "$term-font 10"
   $gtk-set color-scheme "prefer-dark"
   gsettings set org.gnome.desktop.input-sources show-all-sources true
   # /usr/share/sway/scripts/fontconfig.sh "monospace" "$term-font"

@@ -11,7 +11,7 @@ bindings = [
     { action = "First", key = 7, mode = "Vi|~Search", mods = "Shift" },
     { chars = "\u001B[15;4~", key = "F5", mods = "Shift" },
     { chars = "\u001B[15;6;5~", key = "F5", mods = "Control|Shift" },
-    { chars = "source ~/scripts/open-project.fish\n", key = "F", mods = "Control" }
+    # { chars = "source ~/scripts/open-project.fish\n", key = "F", mods = "Control" }
 ]
 
 [window]

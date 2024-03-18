@@ -4,15 +4,15 @@
   "position": "top",
 
   "modules-left": [
-    // "sway/workspaces",
-    // "sway/window"
-    "hyprland/workspaces",
-    "hyprland/window"
+    "sway/workspaces",
+    "sway/window"
+    // "hyprland/workspaces",
+    // "hyprland/window"
   ],
 
   "modules-right": [
-    // "sway/language",
-    "hyprland/language",
+    "sway/language",
+    // "hyprland/language",
     "wireplumber",
     "cpu",
     "memory",
