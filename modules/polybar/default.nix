@@ -11,9 +11,9 @@
     ''}";
     config = ./config.ini;
   };
-  # By default it's wanted by `tray.target`. Correct it to use
-  # `graphical-session.target`.
-  systemd.user.services.polybar = {
-    Install.WantedBy = [ "graphical-session.target" ]; 
-  };
+  # # By default it's wanted by `tray.target`. Correct it to use
+  # # `graphical-session.target`.
+  # systemd.user.services.polybar = {
+  #   Install.WantedBy = [ "graphical-session.target" ]; 
+  # };
 }

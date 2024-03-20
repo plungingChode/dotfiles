@@ -60,7 +60,6 @@ rec {
     sd
     xclip # system clipboard
     xcolor # color picker
-    # slurp # screenshot tool
     viewnior
 
     # Language servers
@@ -75,6 +74,13 @@ rec {
   };
   systemd.user.settings.Manager.DefaultEnvironment = {
     CUSTOM_SCRIPTS_DIR = "${home.homeDirectory}/.config/home-manager/scripts";
+  };
+  # Add an empty tray.target to make polybar and flameshot work
+  systemd.user.targets.tray = {
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = [ "graphical-session-pre.target" ];
+    };
   };
   # Set zoom level in X11
   xresources.properties = {

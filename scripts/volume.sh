@@ -67,6 +67,7 @@ case $1 in
         getVolume
         ;;
     "initialize-polybar")
+        getVolume
         updatePolybarVolume
         ;;
     *)

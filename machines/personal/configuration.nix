@@ -161,7 +161,7 @@
     # Configure keymap in X11
     layout = "gb,hu";
     xkbVariant = ",qwerty";
-    # xkbOptions = "grp:win_shift_toggle,caps:escape";
+    xkbOptions = "grp:win_space_toggle,caps:escape";
 
     desktopManager = {
       xterm.enable = false;
@@ -181,6 +181,10 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
+
+    # TODO resolve warning: xdg-desktop-portal 1.17 reworked how portal
+    # implementations are loaded
+    config.common.default = "*";
     extraPortals = [ 
       pkgs.xdg-desktop-portal-gtk 
     ];
