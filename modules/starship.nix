@@ -4,7 +4,7 @@
     enableFishIntegration = true;
     enableTransience = true;
     settings = {
-      format = "$username$directory[(\\($git_branch$git_commit( $git_status)\\))](fg:cyan)\n$character";
+      format = "$username$directory$nix_shell[(\\($git_branch$git_commit( $git_status)\\))](fg:cyan)\n$character";
       character = {
         success_symbol = "\[\\$\](green)";
         error_symbol = "\[\\$\](red)";
@@ -30,6 +30,9 @@
         modified = "M";
         renamed = "R";
         untracked = "U";
+      };
+      nix_shell = {
+        format = "[in ](fg:purple)[$state nix-shell](bold fg:purple) ";
       };
     };
   };

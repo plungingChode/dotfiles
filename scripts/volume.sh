@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $POLYBAR_SCRIPTS_DIR/lib.sh
+source $CUSTOM_SCRIPTS_DIR/lib.sh
 
 MAX=150
 POLYBAR_MUTED=1

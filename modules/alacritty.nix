@@ -55,7 +55,8 @@
           yellow = "#ebcb8b";
         };
         primary = {
-          background = "#1E2127";
+          # background = "#1E2127";
+          background = "#1c1e20";
           dim_foreground = "#a5abb6";
           foreground = "#d8dee9";
         };

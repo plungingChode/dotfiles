@@ -4,6 +4,8 @@
 set $mod Mod4
 set $term alacritty
 set $menu rofi -show drun
+set $changeVolume $CUSTOM_SCRIPTS_DIR/volume.sh
+set $changeBrightness $CUSTOM_SCRIPTS_DIR/brightness.sh
 
 font pango:Open Sans 9
 
@@ -46,9 +48,9 @@ bindsym $mod+d exec $menu
 # bindsym $mod+Shift+Print exec ~/scripts/screenshot "clip" 
 
 # adjust volume
-bindsym XF86AudioRaiseVolume exec ~/.config/i3/volume.sh up
-bindsym XF86AudioLowerVolume exec ~/.config/i3/volume.sh down
-bindsym XF86AudioMute exec ~/.config/i3/volume.sh mute
+bindsym XF86AudioRaiseVolume exec $changeVolume up
+bindsym XF86AudioLowerVolume exec $changeVolume down
+bindsym XF86AudioMute exec $changeVolume mute
 
 # change focus
 bindsym $mod+h focus left
@@ -115,8 +117,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # brightness/volume controls
-bindsym XF86MonBrightnessUp exec ~/scripts/brightness up
-bindsym XF86MonBrightnessDown exec ~/scripts/brightness down
+bindsym XF86MonBrightnessUp exec $changeBrightness up
+bindsym XF86MonBrightnessDown exec $changeBrightness down
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -185,7 +187,8 @@ bindsym $mod+r mode "resize"
 # Start EasyEffects to enable audio equalizer
 # exec --no-startup-id easyeffects --gapplication-service
 
-# exec --no-startup-id setxkbmap -layout gb,hu
-# exec --no-startup-id setxkbmap -variant  ,qwerty
-# exec --no-startup-id setxkbmap -option 'grp:win_shift_toggle,caps:escape'
+# TODO this doesn't work if applied from `home.nix`
+exec --no-startup-id setxkbmap -layout gb,hu
+exec --no-startup-id setxkbmap -variant  ,qwerty
+exec --no-startup-id setxkbmap -option 'grp:win_shift_toggle,caps:escape'
 # }}}

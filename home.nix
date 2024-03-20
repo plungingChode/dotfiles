@@ -13,7 +13,7 @@ let
   firaCode = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
   astrojsLanguageServer = "@astrojs/language-server";
 in
-{
+rec {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "chode";
@@ -41,8 +41,6 @@ in
 
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
-    bc
-    # bemenu # wayland clone of dmenu
     brightnessctl
     btop
     cargo
@@ -50,9 +48,6 @@ in
     fd
     firaCode 
     firefox-devedition-bin
-    gcolor3
-    # grim # screenshot tool
-    # hyprpaper
     just
     # libreoffice
     lua
@@ -61,11 +56,12 @@ in
     obsidian
     # php81
     # php81Packages.composer
-    # qbittorrent
+    qbittorrent
     sd
-    xclip
+    xclip # system clipboard
+    xcolor # color picker
     # slurp # screenshot tool
-    # viewnior
+    viewnior
 
     # Language servers
     lua-language-server
@@ -74,11 +70,20 @@ in
   ];
 
   #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  home.sessionVariables = {};
+  home.sessionVariables = {
+    CUSTOM_SCRIPTS_DIR = "$XDG_CONFIG_HOME/home-manager/scripts";
+  };
+  systemd.user.settings.Manager.DefaultEnvironment = {
+    CUSTOM_SCRIPTS_DIR = "${home.homeDirectory}/.config/home-manager/scripts";
+  };
+  # Set zoom level in X11
+  xresources.properties = {
+    dpi = 125;
+    "Xft.dpi" = 125;
+  };
 
   services.easyeffects.enable = true;
 
-  programs.fzf.enable = true;
   programs.home-manager.enable = true;
   programs.ripgrep.enable = true;
   programs.tmux.enable = true;

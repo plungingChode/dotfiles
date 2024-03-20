@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../../pkgs
     ];
 
   nix.settings.experimental-features = [
@@ -128,11 +129,14 @@
     # wdisplays # tool to configure displays
     # wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
     _7zz
+    bc
     alacritty
     curl
     gcc
     git
     gnumake
+    # TODO move this to home-manager
+    myPackages.nordic-gtk-theme
     libnotify
     unzip
     wget
@@ -144,10 +148,12 @@
   environment.variables.VISUAL = "vim";
   environment.variables.SYSTEMD_EDITOR = "vim";
 
+
   # TODO required for i3 (but why)
   environment.pathsToLink = [
     "/libexec"
   ]; 
+  environment.sessionVariables.CUSTOM_SCRIPTS_DIR = "$HOME/.config/home-manager/scripts";
   programs.dconf.enable = true;
   services.xserver = {
     enable = true;
@@ -155,7 +161,7 @@
     # Configure keymap in X11
     layout = "gb,hu";
     xkbVariant = ",qwerty";
-    xkbOptions = "grp:win_shift_toggle,caps:escape";
+    # xkbOptions = "grp:win_shift_toggle,caps:escape";
 
     desktopManager = {
       xterm.enable = false;
@@ -169,6 +175,15 @@
       enable = true;
       package = pkgs.i3-gaps;
     };
+  };
+
+  # Required for some GTK applications
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ 
+      pkgs.xdg-desktop-portal-gtk 
+    ];
   };
 
   # File manager

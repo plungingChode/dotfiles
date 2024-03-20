@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $HYPRLAND_CONFIG_DIR/lib.sh
+source $CUSTOM_SCRIPTS_DIR/lib.sh
 
 max=$(brightnessctl max)
 
@@ -18,7 +18,7 @@ change=$(exponentialCurveX "${currentPercent}")
 case $1 in
     "up")
         brightnessctl set "${change}%+"
-        showBrightnessBar
+        # showBrightnessBar
         ;;
     "down")
         if (( $currentPercent <= 1 )); then
@@ -26,7 +26,7 @@ case $1 in
         else 
             brightnessctl set "${change}%-"
         fi
-        showBrightnessBar
+        # showBrightnessBar
         ;;
     *)
         echo "usage: $0 [up|down]"

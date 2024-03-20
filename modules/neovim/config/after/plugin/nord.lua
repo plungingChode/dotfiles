@@ -4,7 +4,7 @@ local nord = require("nord")
 local overrides = {
   Normal = {
     fg = c.snow_storm.origin,
-    bg = "#1E2127",
+    bg = "#1c1e20",
     -- bg = "#211a1a"
   },
   CursorLine = {
