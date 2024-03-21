@@ -97,11 +97,16 @@
     };
   };
 
+  # Enable docker
+  virtualisation.docker = {
+    enable = true;
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.chode = {
+  users.users."chode" = {
     isNormalUser = true;
-    description = "Szigeti Peter";
-    extraGroups = [ "networkmanager" "wheel" ];
+    description = "Szigeti Péter";
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [];
   };
 
@@ -177,6 +182,16 @@
     };
   };
 
+  location = {
+    provider = "manual";
+    latitude = 47.497913;
+    longitude = 19.040236;
+  };
+
+  services.redshift = {
+    enable = true;
+  };
+
   # Required for some GTK applications
   xdg.portal = {
     enable = true;
@@ -198,19 +213,17 @@
   # Required for privilige elevation requests
   security.polkit.enable = true;
   services.gnome.gnome-keyring.enable = true;
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
     };
   };
 

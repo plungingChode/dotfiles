@@ -4,6 +4,7 @@
 set $mod Mod4
 set $term alacritty
 set $menu rofi -show drun
+set $sshMenu rofi -show ssh
 set $changeVolume $CUSTOM_SCRIPTS_DIR/volume.sh
 set $changeBrightness $CUSTOM_SCRIPTS_DIR/brightness.sh
 
@@ -39,17 +40,19 @@ for_window [window_type="menu"] floating enable
 for_window [title="^Library$"] floating enable 
 for_window [title="^Library$"] sticky enable
 
-for_window [title="^ - Thunar"] floating enable
-for_window [title="^ - Thunar"] resize set 70 ppt 70 ppt
+for_window [title="- Thunar$"] floating enable
+for_window [title="- Thunar$"] resize set 70 ppt 70 ppt
+for_window [title="- Thunar$"] move position center
 for_window [class="Nm-connection-editor"] floating enable
-for_window [class="Nm-connection-editor"] resize set 30 ppt 70 ppt
+for_window [class="Nm-connection-editor"] resize set 30 ppt 50 ppt
+for_window [title="Nm-connection-editor"] move position center center
 # }}}
 
 # Key bindings {{{
-# start a terminal
+# Start a terminal
 bindsym $mod+Return exec $term
 
-# kill focused window
+# Kill focused window
 bindsym $mod+Shift+q kill
 
 # TODO shutdown & reboot
@@ -57,26 +60,24 @@ bindsym $mod+Shift+q kill
 
 # TODO audio device selection
 
-# start dmenu (a program launcher)
+# Start program launcher
 bindsym $mod+d exec $menu
 
-# TODO Screens
-# bindsym $mod+Print exec ~/scripts/screenshot "fullscreen"
-# bindsym $mod+Shift+Print exec ~/scripts/screenshot "clip" 
+# Screenshot
 bindsym Print exec "flameshot gui"
 
-# adjust volume
+# Adjust volume
 bindsym XF86AudioRaiseVolume exec $changeVolume up
 bindsym XF86AudioLowerVolume exec $changeVolume down
 bindsym XF86AudioMute exec $changeVolume mute
 
-# change focus
+# Change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys:
+# Alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
@@ -88,17 +89,11 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# alternatively, you can use the cursor keys:
-# bindsym $mod+Shift+h move left
-# bindsym $mod+Shift+j move down
-# bindsym $mod+Shift+k move up
-# bindsym $mod+Shift+l move right
-
 # Change split direction
 bindsym $mod+b split h
 bindsym $mod+v split v
 
-# enter fullscreen mode for the focused container
+# Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # TODO toggle tiling / floating
@@ -107,7 +102,7 @@ bindsym $mod+Shift+space floating toggle
 # TODO change focus between tiling / floating windows
 bindsym $mod+Ctrl+space focus mode_toggle
 
-# switch to workspace
+# Switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
@@ -143,7 +138,6 @@ bindsym XF86MonBrightnessDown exec $changeBrightness down
 # bindsym XF86AudioNext exec playerctl next
 # bindsym XF86AudioPrev exec playerctl previous
 
-
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -152,10 +146,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -185,29 +179,9 @@ bindsym $mod+r mode "resize"
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 # exec --no-startup-id nm-applet
 
-# Status bar
-# exec --no-startup-id polybar
-
-# Compositor (to resolve screen tearing with nVidia cards)
-# exec --no-startup-id picom --daemon
-
-# Wallpaper
-# exec --no-startup-id nitrogen --restore
-
-# TODO Start policy agent
-# exec --no-startup-id lxpolkit
-
-# TODO Load background
-# exec --no-startup-id nitrogen --restore 
-
 # TODO redshift
 
-# TODO pulseaudio equalizer
-# Start EasyEffects to enable audio equalizer
-# exec --no-startup-id easyeffects --gapplication-service
-
-# TODO this doesn't work if applied from `home.nix`
-exec --no-startup-id setxkbmap -layout gb,hu
-exec --no-startup-id setxkbmap -variant  ,qwerty
-exec --no-startup-id setxkbmap -option 'grp:win_shift_toggle,caps:escape'
+# Initially, polybar doesn't update custom scripts correctly. It does work
+# after a forced restart though.
+exec systemctl --user restart polybar.service
 # }}}

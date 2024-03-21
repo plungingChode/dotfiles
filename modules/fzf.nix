@@ -1,7 +1,10 @@
+{ specialArgs, ... }:
+
 {
   programs.fzf = {
     enable = true;
-    enableFishIntegration = true;
+    package = specialArgs.unstable.fzf; 
+    enableFishIntegration = false;
     # TODO colors
   };
 }

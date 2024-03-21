@@ -13,15 +13,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nvim-plugin-dap-vscode-js = {
-      url = "github:mxsdev/nvim-dap-vscode-js";
-      flake = false;
-    };
-    nvim-plugin-gx = {
-      url = "github:chrishrb/gx.nvim";
-      flake = false;
-    };
   };
 
   outputs = { nixpkgs, nixpkgsUnstable, home-manager, ... }@inputs:
@@ -35,7 +26,10 @@
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./home.nix ];
+        modules = [ 
+          ./common.nix
+          ./home.nix 
+        ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
