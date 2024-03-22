@@ -151,14 +151,12 @@ frame_width = 0
 frame_color = "#8EC07C"
 
 [urgency_low]
-# IMPORTANT: colors have to be defined in quotation marks.
-# Otherwise the "#" and following would be interpreted as a comment.
 frame_color = "#3B7C87"
 #foreground = "#3B7C87"
 #background = "#191311"
 background = "#222222"
 foreground = "#bbbbbb"
-timeout = 4
+timeout = 10
 
 [urgency_normal]
 frame_color = "#5B8234"

@@ -1,6 +1,9 @@
+!.Xprofile
+!.Xresources
 !.config
-!.local
 !.gitconfig
+!.local
 !.stow-local-ignore
 !.tigrc
-!.Xresources
+!.config/*
+

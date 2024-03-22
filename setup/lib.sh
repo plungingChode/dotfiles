@@ -27,13 +27,13 @@ function linkWithBackup() {
 
     if [ ! -e "$2" ]; then
         logInfo "CREATE ${dest} -> ${source}"
-        # sudo ln -s "${source}" "${dest}"
+        sudo ln -s "${source}" "${dest}"
         checkErr "Couldn't create link"
     fi
 
     if [ ! -L "${dest}" ]; then
         logInfo "BACKUP ${dest} -> ${dest}.bak"
-        # sudo mv "${dest}" "${dest}.bak"
+        sudo mv "${dest}" "${dest}.bak"
         checkErr "Couldn't create backup"
     fi
 
