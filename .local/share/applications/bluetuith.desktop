@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=bluetuith
+Comment=Bluetooth device manager TUI
+TryExec=bluetuith
+Exec=bluetuith
+Icon=bluetuith
+Terminal=true
+Categories=Bluetooth;Device;DeviceManager
+Keywords=bluetooth;device
+

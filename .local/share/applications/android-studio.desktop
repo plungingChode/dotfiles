@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Android Studio
+Comment=Android application development IDE
+Exec=sh -c '$HOME/Downloads/android-studio/bin/studio.sh'
+Terminal=false
+Categories=IDE;Development;Android
+StartupWMClass=androidstudio
+

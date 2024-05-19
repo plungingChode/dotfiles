@@ -2,15 +2,20 @@
 
 # Super/Windows key
 set $mod Mod4
+set $alt Mod1
 set $term alacritty
 set $menu rofi -show drun
+set $volume $CUSTOM_SCRIPTS_DIR/volume.sh
+set $brightness $CUSTOM_SCRIPTS_DIR/brightness.sh
+set $powerOptions $CUSTOM_SCRIPTS_DIR/power.sh
+set $clipboard rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 
 font pango:Open Sans 9
 
 # No window titles
 for_window [class="^.*"] border pixel 2
 gaps inner 5
-gaps outer 5
+gaps outer 0
 smart_gaps on
 smart_borders on
 # Focus windows on click only (not on hover)
@@ -19,6 +24,8 @@ focus_follows_mouse no
 floating_modifier $mod
 
 #  Window rules {{{
+
+for_window [class="Thunar"] floating enable, resize set height 800px, resize set width 1300px
 
 # default app locations
 for_window [class="Spotify"] move to workspace $ws9
@@ -33,22 +40,24 @@ bindsym $mod+Return exec $term
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# TODO shutdown & reboot
-# bindsym $mod+Shift+x exec ~/scripts/shutdown.sh
+# Shutdown, reboot, etc.
+bindsym $mod+Shift+x exec $powerOptions
 
 # TODO audio device selection
 
-# start dmenu (a program launcher)
+# start program launcher
 bindsym $mod+d exec $menu
 
-# TODO Screens
-# bindsym $mod+Print exec ~/scripts/screenshot "fullscreen"
-# bindsym $mod+Shift+Print exec ~/scripts/screenshot "clip" 
+# Open  clipboard manager
+bindsym $mod+Shift+C exec $clipboard
+
+# Screenshot
+bindsym Print exec flameshot gui
 
 # adjust volume
-bindsym XF86AudioRaiseVolume exec ~/.config/i3/volume.sh up
-bindsym XF86AudioLowerVolume exec ~/.config/i3/volume.sh down
-bindsym XF86AudioMute exec ~/.config/i3/volume.sh mute
+bindsym XF86AudioRaiseVolume exec $volume up
+bindsym XF86AudioLowerVolume exec $volume down
+bindsym XF86AudioMute exec $volume mute
 
 # change focus
 bindsym $mod+h focus left
@@ -82,10 +91,10 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # TODO toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym Shift+Ctrl+space floating toggle
 
 # TODO change focus between tiling / floating windows
-bindsym $mod+Ctrl+space focus mode_toggle
+bindsym $alt+Ctrl+space focus mode_toggle
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -110,18 +119,19 @@ bindsym $mod+Shift+8 move container to workspace 8, workspace 8
 bindsym $mod+Shift+9 move container to workspace 9, workspace 9
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $alt+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
 # brightness/volume controls
-bindsym XF86MonBrightnessUp exec ~/scripts/brightness up
-bindsym XF86MonBrightnessDown exec ~/scripts/brightness down
+bindsym XF86MonBrightnessUp exec $brightness up
+bindsym XF86MonBrightnessDown exec $brightness down
 
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+# TODO
+# bindsym XF86AudioPlay exec playerctl play-pause
+# bindsym XF86AudioNext exec playerctl next
+# bindsym XF86AudioPrev exec playerctl previous
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -157,15 +167,15 @@ bindsym $mod+r mode "resize"
 # screen before suspend. Use loginctl lock-session to lock your screen.
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-# TODO Load autorandr profile
-# exec --no-startup-id autorandr --change
+# Load autorandr profile. It also starts Polybar.
+exec --no-startup-id autorandr --change
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-# Status bar
-exec --no-startup-id polybar
+# Clipboard manager
+exec --no-startup-id greenclip daemon
 
 # Compositor (to resolve screen tearing with nVidia cards)
 exec --no-startup-id picom --daemon
@@ -173,19 +183,19 @@ exec --no-startup-id picom --daemon
 # Wallpaper
 exec --no-startup-id nitrogen --restore
 
-# TODO Start policy agent
-# exec --no-startup-id lxpolkit
-
-# TODO Load background
-exec --no-startup-id nitrogen --restore 
-
 # TODO redshift
 
 # TODO pulseaudio equalizer
 # Start EasyEffects to enable audio equalizer
 # exec --no-startup-id easyeffects --gapplication-service
 
-exec --no-startup-id setxkbmap -layout gb,hu
-exec --no-startup-id setxkbmap -variant  ,qwerty
-exec --no-startup-id setxkbmap -option 'grp:win_shift_toggle,caps:escape'
+# Screenshot daemon
+exec --no-startup-id flameshot
+
+# Notification daemon
+exec --no-startup-id dunst
+
+# TODO GTK settings (gsettings)
+
+exec_always --no-startup-id setxkbmap -layout gb,hu -option grp:win_space_toggle,caps:escape
 # }}}

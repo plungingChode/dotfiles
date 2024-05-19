@@ -102,7 +102,10 @@ return require("packer").startup(function(use)
     branch = "harpoon2"
   })
   -- use("nvim-treesitter/playground")
-  use("leoluz/nvim-dap-go")
+  use({
+    "leoluz/nvim-dap-go",
+    requires = { "nvim-neotest/nvim-nio" }
+  })
 
   use({
     "klen/nvim-config-local",

@@ -19,6 +19,8 @@ abbr --add --position command docc "docker compose"
 # Accept autosuggestions in vi mode with Ctrl + S
 bind --mode insert \cs "accept-autosuggestion"
 bind \cs "accept-autosuggestion"
+bind --mode insert \cf "source $CUSTOM_SCRIPTS_DIR/open-project.fish; commandline -f repaint"
+bind \cf "source $CUSTOM_SCRIPTS_DIR/open-project.fish; commandline -f repaint"
 
 # nvm --silent use 16
 

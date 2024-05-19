@@ -1,27 +1,35 @@
-#!/bin/bash
-#
-# Usage: brightness.sh <up|down>
-#
-# Set display brightness using "brightnessctl" and display an indicator
-# based on the current value. 
-#
-# Requires ~/scripts/progress.sh
-#
-# Positional arguments
-#    * up   - Increase brightness by 5%.
-#    * down - Decrease brightness by 5%.
-#
+#!/usr/bin/env bash
 
-# Current brightness
-brightness=$(brightnessctl g)
+source $CUSTOM_SCRIPTS_DIR/lib.sh
 
-if [ $1 = "down" -a $brightness -gt "6000" ]; then
-    brightnessctl -q -d intel_backlight s 5%-
-elif [ $1 = "up" ]; then
-    brightnessctl -q -d intel_backlight s 5%+
-fi
+max=$(brightnessctl max)
 
-brightness=$(brightnessctl g)
-icon="/usr/share/icons/Faba/48x48/notifications/notification-display-brightness.svg"
-progress=$(~/scripts/progress.sh "$brightness" 120000)
-dunstify -a 'brightnessChange' -r 69420 -i "$icon" " $progress" 
+function showBrightnessBar() {
+    local brightness=$(brightnessctl get)
+    local icon="󰃟 " 
+    showProgressBar "brightness" $icon $brightness $max
+}
+
+current=$(brightnessctl get)
+
+currentPercent=$(( $current * 100 / $max ))
+change=$(exponentialCurveX "${currentPercent}")
+
+case $1 in
+    "up")
+        brightnessctl set "${change}%+"
+        # showBrightnessBar
+        ;;
+    "down")
+        if (( $currentPercent <= 1 )); then
+            brightnessctl set 1
+        else 
+            brightnessctl set "${change}%-"
+        fi
+        # showBrightnessBar
+        ;;
+    *)
+        echo "usage: $0 [up|down]"
+        ;;
+esac
+

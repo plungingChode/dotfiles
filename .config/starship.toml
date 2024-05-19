@@ -1,4 +1,4 @@
-format = "$username$directory[(\\($git_branch$git_commit( $git_status)\\))](fg:cyan)\n$character"
+format = "$username$directory[(\\($git_branch$git_commit( $git_status)\\))](fg:cyan) ${custom.lf_shell}\n$character"
 
 [character]
 success_symbol = "[\\$](green)"
@@ -25,3 +25,7 @@ deleted = "D"
 modified = "M"
 renamed = "R"
 untracked = "U"
+
+[custom.lf_shell]
+command = 'echo [lf-shell]' # shows output of command
+when = ''' test -n "$LF_LEVEL" '''

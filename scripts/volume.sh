@@ -1,61 +1,87 @@
-#!/bin/bash
-#
-# Usage: volume.sh <up|down|m>
-#
-# Modify the volume of the current audio output device and print and indicator
-# based on the current status.
-#
-# Positional arguments
-#    * up   - Increase volume by 2% and unmute.
-#    * down - Decrease volume by 2% and unmute.
-#    * m    - Toggle mute.
-#
+#!/usr/bin/env bash
 
-SINK="@DEFAULT_SINK@"
-MAX_VOLUME="150"
+source $CUSTOM_SCRIPTS_DIR/lib.sh
+
+MAX=150
+POLYBAR_MUTED=1
+POLYBAR_NOT_MUTED=0
+
+function getVolume() {
+    pactl list sinks |\
+    grep $(pactl get-default-sink) -m 1 -A 7 |\
+    tail -n 1 |\
+    cut -d/ -f2 |\
+    sed -e 's/[ %]//g'
+}
+
+# "yes" or "no"
+function isMuted() {
+    pactl list sinks |\
+    grep $(pactl get-default-sink) -m 1 -A 6 |\
+    tail -n 1 |\
+    cut -d: -f2 |\
+    cut -d' ' -f2
+}
+
+function updatePolybarVolume() {
+    # [MUTED] shows up after the volume definition, if the sink is muted
+    # TODO pactl is different!
+    if [ "$(isMuted)" = "yes" ]; then
+        updatePolybar "volume" $POLYBAR_MUTED
+    else
+        updatePolybar "volume" $POLYBAR_NOT_MUTED
+    fi
+}
+
+function showVolumeBar() {
+    local volume=$(getVolume)
+    local icon="" 
+    if (( $volume >= 50 )); then
+        local icon="" 
+    fi
+    showProgressBar "volume" $icon $volume $MAX
+}
+
+volume=$(getVolume)
 
 case $1 in
-    "u" | "up")
-        pactl set-sink-mute $SINK off
-        pactl set-sink-volume $SINK +2%
+    "up")
+        # TODO check if valid number
+        change=$2
+        if [ -z $change ]; then
+            change=$(exponentialCurveX "${volume}")
+        fi
+        if (( $volume >= $MAX )); then
+            pactl set-sink-volume @DEFAULT_SINK@ "${MAX}%"
+        else
+            pactl set-sink-volume @DEFAULT_SINK@ "+${change}%"
+        fi
+        # showVolumeBar
+        updatePolybarVolume
         ;;
-    "d" | "down")
-        pactl set-sink-mute $SINK off
-        pactl set-sink-volume $SINK -2%
+    "down")
+        change=$2
+        if [ -z $change ]; then
+            change=$(exponentialCurveX "${volume}")
+        fi
+        pactl set-sink-volume @DEFAULT_SINK@ "-${change}%"
+        # showVolumeBar
+        updatePolybarVolume
         ;;
-    "m" | "mute")
-        pactl set-sink-mute $SINK toggle
+    "mute")
+        pactl set-sink-mute @DEFAULT_SINK@ toggle
+        updatePolybarVolume
+        ;;
+    "get")
+        getVolume
+        ;;
+    "initialize-polybar")
+        updatePolybarVolume
+        getVolume
         ;;
     *)
-        echo "unknown argument $1"
+        echo "usage: $0 [get|initialize-polybar|up|down|mute]"
         exit 1
         ;;
 esac
 
-volume=$(
-    pactl get-sink-volume "$SINK" \
-        | sd "%.*" "" \
-        | sd ".*? / " "" \
-        | head -n 1
-)
-mute=$(
-    pactl get-sink-mute "$SINK" \
-        | sd "Mute: " ""
-)
-icon="/usr/share/icons/Faba/48x48/notifications"
-
-# Cap volume at MAX_VOLUME
-if [ "$volume" -gt "$MAX_VOLUME" ]; then
-    volume=150
-    pactl set-sink-volume "$SINK" "$MAX_VOLUME"%
-fi 
-
-if [[ "$mute" =~ "yes" ]]; then
-    icon="${icon}/notification-audio-volume-off.svg"
-    volume=0
-else
-    icon="${icon}/notification-audio-volume-medium.svg"
-fi
-
-progress=$(~/scripts/progress.sh "$volume" "$MAX_VOLUME")
-dunstify -a 'volumeChange' -r 69420 -i "$icon" " $progress" 

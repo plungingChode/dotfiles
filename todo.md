@@ -2,16 +2,16 @@
     * theming
     * dismiss all shortcut
     * invoke last shortcut
-- screenshot methods
+- ~~screenshot methods~~
 - calendar
 - XDG autostart applications (with dex?)
 - microphone muting
-- multi-monitor setup
+- ~~multi-monitor setup~~
 - modes
     * with polybar display
-- volume change indicator
+- ~~volume change indicator~~
 - brightness change indicator
-- power (shutdown, sleep, session exit) menu
+- ~~power (shutdown, sleep, session exit) menu~~
 - microphone mute indicator
 - migrate window rules from `sway/config`
 - fill out `ensure-installed`
@@ -24,8 +24,11 @@
 - mime types for file associations
 - easyeffects
 - mounting daemon
-- zathura dark theme
+- ~~zathura dark theme~~
 - clipboard persistence
+- ~~fish fzf~~
+- locking
+- disk encryption?
 
 - markdown shortcuts in neovim
     * ~~`ms`, `mb`, `mi` for strikethrough, bold, italic~~

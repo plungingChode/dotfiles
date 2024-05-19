@@ -19,7 +19,7 @@ local function harpoon_file()
   local current_buf = vim.fn.expand("%")
   for i = 1, len do
     local harpooned = list:get(i)
-    if harpooned.value == current_buf then
+    if current_buf:sub(-#harpooned.value) == harpooned.value then
       active = i
       break
     end
@@ -36,6 +36,7 @@ require("lualine").setup({
   options = {
     icons_enabled = false,
     theme = "nord",
+    -- theme = "gruvbox",
     component_separators = "│",
     section_separators = "",
   },

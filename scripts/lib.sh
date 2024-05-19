@@ -14,16 +14,17 @@ function exponentialCurveX() {
 
 # Show a progress bar with `notify-send`.
 # 
-# * appid - The app name and type of the progress bar. If not a valid progress
-# bar kind, it will not be displayed.
+# Parameters:
+# * |appid| - The app name and type of the progress bar. If not a valid
+# progress bar kind, it will not be displayed.
 #
-# * message - Message to display inside the progress bar, usually an icon
+# * |message| - Message to display inside the progress bar, usually an icon
 # glyph.
 #
-# * actualValue - Current value of the progress bar. Will be scaled according
-# to the [maxValue].
+# * |actualValue| - Current value of the progress bar. Will be scaled according
+# to the |maxValue|.
 #
-# * maxValue - (Optional) Maximum value possible to pass as [actualValue]. By
+# * |maxValue| - (Optional) Maximum value possible to pass as [actualValue]. By
 # default, this is 100.
 #
 function showProgressBar() {
@@ -55,4 +56,15 @@ function showProgressBar() {
     > "$idFile"
 
     return 0
+}
+
+# Refresh a given `polybar` module
+# 
+# Parameters:
+# * |moduleName| - name of the module to update
+# * |hookId| - (optional) index of the hook to update (default: 0)
+function updatePolybar() {
+    local moduleName=$1
+    local hookId="${2:-0}"
+    polybar-msg action "$moduleName" hook "$hookId" # > /dev/null
 }

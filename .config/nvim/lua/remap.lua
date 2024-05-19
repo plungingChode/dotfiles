@@ -14,12 +14,20 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 -- vim.keymap.set({ "n", "i" }, "<C-v>", "<C-S-v>")
 
+-- Use system clipboard
+vim.keymap.set({ "n", "v" }, "y", [["+y]])
+vim.keymap.set({ "n", "v" }, "d", [["+d]])
+vim.keymap.set({ "n", "v" }, "D", [["+D]])
+vim.keymap.set("n", "Y", [["+yg_]])
+vim.keymap.set({ "n", "v" }, "p", [["+p]])
+vim.keymap.set({ "n", "v" }, "P", [["+P]])
+
 -- Keep cursor position when using J
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- Yank to clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
+-- vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+-- vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- Fix Ctrl+C for visual block mode
 vim.keymap.set("i", "<C-c>", "<Esc>")

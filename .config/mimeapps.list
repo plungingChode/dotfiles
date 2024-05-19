@@ -1,0 +1,26 @@
+[Default Applications]
+# zathura
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop
+
+# nvim
+application/json=nvim-standalone.desktop
+application/sql=nvim-standalone.desktop
+application/toml=nvim-standalone.desktop
+application/vnd.apple.keynote=nvim-standalone.desktop
+application/x-openvpn-profile=nvim-standalone.desktop
+application/x-php=nvim-standalone.desktop
+application/x-shellscript=nvim-standalone.desktop
+application/xml=nvim-standalone.desktop
+application/yaml=nvim-standalone.desktop
+text/css=nvim-standalone.desktop
+text/html=nvim-standalone.desktop
+text/javascript=nvim-standalone.desktop
+text/markdown=nvim-standalone.desktop
+text/plain=nvim-standalone.desktop
+text/vnd.trolltech.linguist=nvim-standalone.desktop
+text/x-c++=nvim-standalone.desktop
+text/x-c=nvim-standalone.desktop
+text/x-go=nvim-standalone.desktop
+text/x-java=nvim-standalone.desktop
+text/x-kotlin=nvim-standalone.desktop
+text/x-python=nvim-standalone.desktop

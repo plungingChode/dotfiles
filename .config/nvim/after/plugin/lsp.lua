@@ -166,8 +166,8 @@ cmp.setup({
       select = true,
     }),
     ["<Tab>"] = cmp_action.tab_complete(),
-    ["<C-n>"] = cmp_action.luasnip_jump_forward(),
-    ["<C-p>"] = cmp_action.luasnip_jump_backward(),
+    -- ["<C-n>"] = cmp_action.luasnip_jump_forward(),
+    -- ["<C-p>"] = cmp_action.luasnip_jump_backward(),
   },
   sources = {
     { name = "nvim_lsp" },

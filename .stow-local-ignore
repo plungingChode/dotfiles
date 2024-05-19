@@ -3,7 +3,7 @@ links.*
 .gitignore
 .ignore
 
-postInstall.sh
+post_install.sh
 setup/
 pacman.conf
 greetd.config.toml

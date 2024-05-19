@@ -4,11 +4,7 @@ local s = ls.snippet
 local sn = ls.snippet_node
 local t = ls.text_node
 local i = ls.insert_node
-local f = ls.function_node
-local c = ls.choice_node
 local d = ls.dynamic_node
-local r = ls.restore_node
-local fmt = require("luasnip.extras.fmt").fmt
 local rep = require("luasnip.extras").rep
 local postfix = require("luasnip.extras.postfix").postfix
 
@@ -24,40 +20,48 @@ local errguard = s("errguard", {
   t({ "", "}" })
 })
 
+-- also matches leading $ sign and property accees ->
+local php_variable_pattern = [[[%w%.%_%-%"%'%$%->]+$]]
 local postfix_iferr = postfix({
   trig = ".iferr",
-  match_pattern = [[[%w%.%_%-%"%'%$]+$]], -- also match leading $ sign
+  match_pattern = php_variable_pattern, 
 }, {
   d(1, function(_, parent)
     local var = parent.env.POSTFIX_MATCH
     return sn(nil, {
       t({ "if (isErr(" .. var .. ")) {", "" }),
-      t("    "), i(1),
+      t("    return " .. var .. ";"),
       t({ "", "}", "" }),
-      rep(1), t(" = "), rep(1), t("->ok();"),
+      i(1),
     })
   end, {}),
 })
 
-local postfix_errguard = postfix({
-  trig = ".errguard",
-  match_pattern = [[[%w%.%_%-%"%'%$]+$]], -- also match leading $ sign
+local postfix_unwrap = postfix({
+  trig = ".unwrap",
+  match_pattern = php_variable_pattern,
 }, {
   d(1, function(_, parent)
     local var = parent.env.POSTFIX_MATCH
     return sn(nil, {
       t({ "if (isErr(" .. var .. ")) {", "" }),
-      t("    "), i(1, "return " .. var .. ";"),
+      t("    return " .. var .. ";"),
       t({ "", "}" }),
       t({ "", var .. " = " .. var .. "->ok();", "" }),
-      i(0),
+      i(1),
     })
   end, {}),
+})
+
+local doc_comment = s("doccomment", {
+  t({"/**", " * "}), i(1), t({"", " */"})
 })
 
 ls.add_snippets("php", {
   iferr,
   errguard,
   postfix_iferr,
-  postfix_errguard,
+  postfix_unwrap,
+  doc_comment,
 })
+

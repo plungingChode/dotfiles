@@ -1,11 +1,12 @@
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 export XDG_CONFIG_HOME=$HOME/.config
-export I3_SCRIPT_HOME=$HOME/.config/i3
-export MANPAGER=bat --plain
+export CUSTOM_SCRIPTS_DIR=$HOME/scripts
+export MANPAGER="bat --plain"
 export BAT_THEME=Nord
 export VISUAL=nvim
 export EDITOR=nvim
 export BROWSER=firefox-developer-edition
+export BATTERY_NAME=BAT0
 
 # vim: set filetype=sh

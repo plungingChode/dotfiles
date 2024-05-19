@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Firefox Developer Edition (Personal)
+Comment=Browse the World Wide Web
+Exec=sh -c 'firefox-developer-edition --profile $HOME/.mozilla/firefox/personal/ %u'
+Icon=firefox-developer-edition
+Terminal=false
+MimeType=x-scheme-handler/http;x-scheme-handler/https
+Categories=Internet;Browser;WWW;Web;Explorer;WebBrowser;
+StartupWMClass=firefoxdeveloperedition
+
