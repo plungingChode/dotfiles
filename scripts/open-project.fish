@@ -1,7 +1,10 @@
 #!/bin/fish
 
-set projects "$(find $HOME/source $HOME/personal -maxdepth 1 -mindepth 1 -type d)"
-set projects "$projects\n$(find $HOME/source/adsretail_api/fo/server/ $HOME/dotfiles -mindepth 0 -maxdepth 0 -type d)"
+set projects1 "$(find $HOME/source $HOME/personal -maxdepth 1 -mindepth 1 -type d)"
+set projects2 "$(find $HOME/source/adsretail_api/fo/server/ $HOME/dotfiles -mindepth 0 -maxdepth 0 -type d)"
+set newline '
+'
+set projects "$projects1$newline$projects2"
 
 set project $(echo "$projects" | fzf)
 

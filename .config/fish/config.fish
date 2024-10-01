@@ -22,7 +22,7 @@ bind \cs "accept-autosuggestion"
 bind --mode insert \cf "source $CUSTOM_SCRIPTS_DIR/open-project.fish; commandline -f repaint"
 bind \cf "source $CUSTOM_SCRIPTS_DIR/open-project.fish; commandline -f repaint"
 
-# nvm --silent use 16
+nvm --silent use 18
 
 # Prompt
 function starship_transient_prompt_func

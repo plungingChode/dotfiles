@@ -22,6 +22,8 @@ vim.wo.relativenumber = true
 -- Enable mouse mode
 vim.o.mouse = "a"
 
+vim.o.clipboard = vim.o.clipboard .. "unnamedplus"
+
 -- Enable break indent
 vim.o.breakindent = true
 

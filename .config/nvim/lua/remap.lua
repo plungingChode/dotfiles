@@ -15,12 +15,12 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 -- vim.keymap.set({ "n", "i" }, "<C-v>", "<C-S-v>")
 
 -- Use system clipboard
-vim.keymap.set({ "n", "v" }, "y", [["+y]])
-vim.keymap.set({ "n", "v" }, "d", [["+d]])
-vim.keymap.set({ "n", "v" }, "D", [["+D]])
-vim.keymap.set("n", "Y", [["+yg_]])
-vim.keymap.set({ "n", "v" }, "p", [["+p]])
-vim.keymap.set({ "n", "v" }, "P", [["+P]])
+-- vim.keymap.set({ "n", "v" }, "y", [["+y]])
+-- vim.keymap.set({ "n", "v" }, "d", [["+d]])
+-- vim.keymap.set({ "n", "v" }, "D", [["+D]])
+-- vim.keymap.set("n", "Y", [["+yg_]])
+-- vim.keymap.set({ "n", "v" }, "p", [["+p]])
+-- vim.keymap.set({ "n", "v" }, "P", [["+P]])
 
 -- Keep cursor position when using J
 vim.keymap.set("n", "J", "mzJ`z")

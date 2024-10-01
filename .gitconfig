@@ -13,6 +13,7 @@
     defaultBranch = master
 [core]
     pager = delta
+    autocrlf = false
 [interactive]
     diffFilter = delta --color-only
 [add.interactive]

@@ -42,21 +42,6 @@ local overrides = {
     bg = c.none
   },
   -- Leap colors
-  LeapBackdrop = {
-    link = "Comment"
-  },
-  LeapMatch = {
-    fg = c.snow_storm.brighter,
-    bold = true
-  },
-  LeapLabelPrimary = {
-    fg = c.aurora.yellow,
-    bold = true
-  },
-  LeapLabelSecondary = {
-    fg = c.aurora.green,
-    bold = true
-  },
   -- Diff view settings
   DiffAdd = {
     fg = c.none,
@@ -155,6 +140,13 @@ local overrides = {
   ["@lsp.type.parameter"] = {
     fg = c.snow_storm.origin,
   },
+  -- introduced by Treesitter updates 
+  ["@tag.builtin"] = {
+    link = "@keyword",
+  },
+  ["@constant.falsy"] = {
+    link = "@keyword",
+  },
 }
 
 nord.setup({
@@ -172,3 +164,5 @@ nord.setup({
 })
 
 vim.cmd [[colorscheme nord]]
+
+-- vim.cmd [[colorscheme github_light]]
