@@ -1,8 +1,5 @@
 [Default Applications]
-# zathura
 application/pdf=org.pwmt.zathura-pdf-mupdf.desktop
-
-# nvim
 application/json=nvim-standalone.desktop
 application/sql=nvim-standalone.desktop
 application/toml=nvim-standalone.desktop
@@ -23,4 +20,9 @@ text/x-c=nvim-standalone.desktop
 text/x-go=nvim-standalone.desktop
 text/x-java=nvim-standalone.desktop
 text/x-kotlin=nvim-standalone.desktop
-text/x-python=nvim-standalone.desktop
+text/x-python=userapp-alacritty -e nvim-O4Y8N2.desktop
+x-scheme-handler/http=firefox-developer-edition.desktop
+x-scheme-handler/https=firefox-developer-edition.desktop
+
+[Added Associations]
+text/x-python=nvim.desktop;userapp-alacritty -e nvim-O4Y8N2.desktop;
