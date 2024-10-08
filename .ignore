@@ -6,4 +6,5 @@
 !.stow-local-ignore
 !.tigrc
 !.config/*
-
+!.gitignore
+!.i3

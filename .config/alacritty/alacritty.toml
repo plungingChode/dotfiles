@@ -17,6 +17,9 @@ bindings = [
 [window]
 dynamic_padding = true
 
+[shell]
+program = "/bin/fish"
+
 # [window.padding]
 # y = 5
 

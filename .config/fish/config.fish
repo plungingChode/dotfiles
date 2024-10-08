@@ -1,6 +1,11 @@
 # Disable greeting message
 set --universal fish_greeting
 
+set --export CUSTOM_SCRIPTS_DIR "$HOME/scripts"
+set --export BAT_THEME Nord
+set --export VISUAL nvim
+set --export EDITOR nvim
+
 # Use icons in alacritty
 alias eza="eza --icons"
 alias l="eza --classify"
@@ -17,8 +22,8 @@ alias vimdiff="nvim -d"
 abbr --add --position command docc "docker compose"
 
 # Accept autosuggestions in vi mode with Ctrl + S
-bind --mode insert \cs "accept-autosuggestion"
-bind \cs "accept-autosuggestion"
+bind --mode insert \cs accept-autosuggestion
+bind \cs accept-autosuggestion
 bind --mode insert \cf "source $CUSTOM_SCRIPTS_DIR/open-project.fish; commandline -f repaint"
 bind \cf "source $CUSTOM_SCRIPTS_DIR/open-project.fish; commandline -f repaint"
 
@@ -26,7 +31,7 @@ nvm --silent use 18
 
 # Prompt
 function starship_transient_prompt_func
-  starship module character
+    starship module character
 end
 starship init fish | source
 enable_transience
