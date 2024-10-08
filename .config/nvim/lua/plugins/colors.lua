@@ -164,6 +164,18 @@ local function config()
 		["@constant.falsy"] = {
 			link = "@keyword",
 		},
+		-- Treesitter context
+		TreeSitterContext = {
+			link = "@normal",
+		},
+		TreesitterContextBottom = {
+			underline = true,
+			sp = c.polar_night.bright,
+		},
+		TreesitterContextLineNumberBottom = {
+			underline = true,
+			sp = c.polar_night.bright,
+		},
 	}
 
 	nord.setup({
@@ -179,13 +191,62 @@ local function config()
 			end
 		end,
 	})
+end
 
-	vim.cmd([[colorscheme nord]])
+local function noClownFiestaInit()
+	local c = require("no-clown-fiesta.palette")
+	local overrides = {
+		["@variable.parameter.php"] = { link = "Function" },
+		["@tag.builtin.tsx"] = { link = "@tag" },
+		["@type"] = { link = "@tag" },
+	}
+	for k, v in pairs(overrides) do
+		vim.api.nvim_set_hl(0, k, v)
+	end
 end
 
 return {
 	{
 		"gbprod/nord.nvim",
 		config = config,
+		init = function()
+			vim.cmd([[colorscheme nord]])
+		end,
 	},
+	-- {
+	-- 	"aktersnurra/no-clown-fiesta.nvim",
+	-- 	opts = {
+	-- 		-- transparent = true,
+	-- 		styles = {
+	-- 			lsp = { undercurl = true },
+	-- 			match_paren = { bold = true, underline = false },
+	-- 		},
+	-- 	},
+	-- 	init = function()
+	-- 		-- vim.cmd([[colorscheme no-clown-fiesta]])
+	-- 		noClownFiestaInit()
+	-- 	end,
+	-- },
+	-- {
+	-- 	"aliqyan-21/darkvoid.nvim",
+	-- 	config = function()
+	-- 		require("darkvoid").setup({})
+	-- 		vim.cmd([[colorscheme darkvoid]])
+	-- 	end,
+	-- },
+	-- {
+	-- 	"olivercederborg/poimandres.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require("poimandres").setup({
+	-- 			disable_bakcground = true,
+	-- 			disable_italics = true,
+	-- 		})
+	-- 	end,
+	-- 	init = function()
+	-- 		vim.cmd([[colorscheme poimandres]])
+	-- 		poimandresConfig()
+	-- 	end,
+	-- },
 }

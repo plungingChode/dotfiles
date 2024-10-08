@@ -3,17 +3,23 @@ local M = {}
 ---Execute the [phpstan_exe] and send the results to the quickfix list.
 ---
 ---@param phpstan_exe string|nil path to the PHPStan executable
-function M.phpstan_analyse_to_quickfix(phpstan_exe)
+---@param args string|nil extra arguments passed to the PHPStan executable
+function M.phpstan_analyse_to_quickfix(phpstan_exe, args)
 	phpstan_exe = phpstan_exe or "./vendor/bin/phpstan"
+	args = args or nil
 
-  -- stylua: ignore
-  local output = vim.fn.system({
-    phpstan_exe, "analyse",
-    "--configuration", "phpstan.neon",
-    "--error-format", "raw",
-    "--no-progress",
-  })
+	-- stylua: ignore
+	local command = {
+	  phpstan_exe, "analyse",
+	  "--configuration", "phpstan.neon",
+	  "--error-format", "raw",
+	  "--no-progress",
+	}
+	if args ~= nil then
+		command = table.insert(command, 3, args)
+	end
 
+	local output = vim.fn.system(command)
 	local qf_items = {}
 	for output_line in output:gmatch("([^\n]*)\n") do
 		local file_end = output_line:find(":", 1)
