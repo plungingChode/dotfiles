@@ -7,7 +7,7 @@ local function config()
 			typescript = { "prettierd" },
 			javascriptreact = { "prettierd" },
 			typescriptreact = { "prettierd" },
-			json = { "prettierd" },
+			-- json = { "prettierd" },
 			fish = { "fish_indent" },
 			lua = { "stylua" },
 			sh = { "shfmt" },

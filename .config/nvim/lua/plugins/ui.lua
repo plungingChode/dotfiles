@@ -53,6 +53,20 @@ return {
 			{ "gx", "<cmd>Browse<cr>", desc = "Open link" },
 			{ "gx", "<cmd>Browse<cr>", mode = "x", desc = "Open link" },
 		},
+		cmd = { "Browse" },
+		opts = {
+			handlers = {
+				jira = {
+					name = "jira",
+					handle = function(mode, line, _)
+						local ticket = require("gx.helper").find(line, mode, "(%u+%-%d+)")
+						if ticket then
+							return "https://adiumsoft.atlassian.net/browse/" .. ticket
+						end
+					end,
+				},
+			},
+		},
 	},
 	-- Fuzzy finder
 	{
@@ -202,6 +216,11 @@ return {
 		cmd = {
 			"UndotreeToggle",
 		},
+	},
+	-- LSP loading state
+	{
+		"j-hui/fidget.nvim",
+		opts = {},
 	},
 }
 

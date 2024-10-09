@@ -20,7 +20,7 @@ require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
 	},
-	install = { colorscheme = { "nord" } },
+	install = { colorscheme = { "default" } },
 	-- Configure any other settings here. See the documentation for more details.
 	-- automatically check for plugin updates
 	checker = { enabled = false },

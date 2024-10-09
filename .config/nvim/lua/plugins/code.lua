@@ -40,7 +40,22 @@ return {
 	-- Detect tabstop and shiftwidth automatically
 	{ "tpope/vim-sleuth" },
 	-- Add indentation guides even on blank lines
-	{ "lukas-reineke/indent-blankline.nvim" },
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		config = function()
+			require("ibl").setup({
+				indent = {
+					highlight = { "Whitespace" },
+					char = "│",
+				},
+				scope = { enabled = false },
+				whitespace = {
+					highlight = { "Whitespace" },
+					remove_blankline_trail = false,
+				},
+			})
+		end,
+	},
 	-- Code snippets
 	{
 		"L3MON4D3/LuaSnip",
@@ -68,6 +83,15 @@ return {
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		opts = {
 			enable_autocommand = false, -- required when used with Comment.nvim
+		},
+	},
+	-- Function/class context
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		opts = {
+			multiline_threshold = 3,
+			min_window_height = 30,
+			max_lines = 5,
 		},
 	},
 	-- Surround selections

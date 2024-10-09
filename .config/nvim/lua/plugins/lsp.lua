@@ -117,10 +117,10 @@ local function config()
 	})
 
 	-- Tailwind CSS
-	lspconfig.tailwindcss.setup({
-		capabilities = capabilities,
-		on_attach = on_attach,
-	})
+	-- lspconfig.tailwindcss.setup({
+	-- 	capabilities = capabilities,
+	-- 	on_attach = on_attach,
+	-- })
 
 	-- Svelte
 	lspconfig.svelte.setup({
@@ -142,6 +142,10 @@ local function config()
 
 	-- HTML
 	lspconfig.html.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+	})
+	lspconfig.emmet_language_server.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
 	})
@@ -243,6 +247,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
+		commit = "6d25cf1",
 		dependencies = {
 			"williamboman/mason.nvim",
 			{ "williamboman/mason-lspconfig.nvim", config = function() end },

@@ -103,6 +103,23 @@ local classdef = s("classdef", {
   t({ "}" }),
 })
 
+local function make_function_decl(shorthand, modifiers)
+  -- stylua: ignore
+  return s(shorthand, {
+    t(modifiers .. " function "), i(1), t("("), i(2), t({ "): void", "" }),
+    t({ "{", "" }),
+    t("    "), i(0), t({ "", "" }),
+    t({ "}", "" }),
+  })
+end
+
+local function make_log_call(log_level)
+  -- stylua: ignore
+  return s("log" .. log_level, {
+    t("$this->logger->" .. log_level .. "(\""), i(0), t("\");"),
+  })
+end
+
 ls.add_snippets("php", {
 	iferr,
 	errguard,
@@ -110,4 +127,18 @@ ls.add_snippets("php", {
 	postfix_unwrap,
 	doc_comment,
 	classdef,
+
+	make_function_decl("pubfn", "public"),
+	make_function_decl("profn", "protected"),
+	make_function_decl("prifn", "private"),
+	make_function_decl("stpubfn", "public static"),
+	make_function_decl("stprofn", "protected static"),
+	make_function_decl("stprifn", "private static"),
+
+	make_log_call("info"),
+	make_log_call("debug"),
+	make_log_call("warn"),
+	make_log_call("error"),
 })
+
+-- vim: sw=2 ts=2
