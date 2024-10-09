@@ -6,6 +6,7 @@ set $alt Mod1
 set $term alacritty
 set $menu rofi -show drun
 set $volume $CUSTOM_SCRIPTS_DIR/volume.sh
+set $lock $CUSTOM_SCRIPTS_DIR/lock.sh
 set $brightness $CUSTOM_SCRIPTS_DIR/brightness.sh
 set $powerOptions $CUSTOM_SCRIPTS_DIR/power.sh
 set $clipboard rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
@@ -161,12 +162,6 @@ bindsym $mod+r mode "resize"
 # }}}
 
 # Startup applications {{{
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
 # Load autorandr profile. It also starts Polybar.
 exec --no-startup-id autorandr --change
 
@@ -197,5 +192,9 @@ exec --no-startup-id dunst
 
 # TODO GTK settings (gsettings)
 
-exec_always --no-startup-id setxkbmap -layout gb,hu -option grp:win_space_toggle,caps:escape
+# exec_always --no-startup-id setxkbmap -layout gb,hu -option grp:win_space_toggle,caps:escape
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock
 # }}}

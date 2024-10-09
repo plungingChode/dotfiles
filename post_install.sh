@@ -1,5 +1,11 @@
 #!/usr/bin/env sh
 
+yay -R \
+    xterm \
+    endeavouros-xfce4-terminal-colors \
+    xfce4-terminal \
+    i3lock
+
 yay -S \
     extra/fish \
     extra/fisher \
@@ -28,12 +34,14 @@ yay -S \
     extra/jre-openjdk \
     extra/dbeaver \
     extra/brightnessctl \
-    aur/nordic-theme
-
-yay -R \
-    xterm \
-    endeavouros-xfce4-terminal-colors \
-    xfce4-terminal
+    extra/nitrogen \
+    extra/picom \
+    extra/flameshot \
+    extra/autorandr \
+    extra/xss-lock \
+    aur/rofi-greenclip \
+    aur/nordic-theme-git \
+    aur/i3lock-color
 
 # Node version manager
 fisher install jorgebucaran/nvm.fish
