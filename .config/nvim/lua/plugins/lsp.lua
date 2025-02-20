@@ -117,10 +117,19 @@ local function config()
 	})
 
 	-- Tailwind CSS
-	-- lspconfig.tailwindcss.setup({
-	-- 	capabilities = capabilities,
-	-- 	on_attach = on_attach,
-	-- })
+	lspconfig.tailwindcss.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		filetypes = {
+			"javascript",
+			"javascriptreact",
+			"typescript",
+			"typescriptreact",
+			"html",
+			"css",
+			"astro",
+		},
+	})
 
 	-- Svelte
 	lspconfig.svelte.setup({
@@ -129,7 +138,7 @@ local function config()
 	})
 
 	-- Astro
-	lspconfig.svelte.setup({
+	lspconfig.astro.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
 	})
@@ -158,6 +167,15 @@ local function config()
 
 	-- Go
 	lspconfig.gopls.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+	})
+	lspconfig.templ.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+	})
+
+	lspconfig.gleam.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
 	})

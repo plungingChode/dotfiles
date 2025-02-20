@@ -68,13 +68,26 @@ return {
 			require("luasnip.loaders.from_lua").load({
 				paths = vim.fn.stdpath("config") .. "/snippets",
 			})
+
+			-- stop snippets when you leave to normal mode
+			local function leave_snippet()
+				local luasnip = require("luasnip")
+				if
+					((vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n") or vim.v.event.old_mode == "i")
+					and luasnip.session.current_nodes[vim.api.nvim_get_current_buf()]
+					and not luasnip.session.jump_active
+				then
+					luasnip.unlink_current()
+				end
+			end
+			vim.api.nvim_create_autocmd("ModeChanged", { callback = leave_snippet, pattern = "*" })
 		end,
 	},
 	-- "gc" to comment visual regions/lines
 	{
 		"numToStr/Comment.nvim",
 		opts = {
-			pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+			-- pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 		},
 	},
 	-- Comment strings for JSX/TSX files
@@ -153,6 +166,14 @@ return {
 	},
 	-- Project-specific configurations (.nvim.lua)
 	{ "klen/nvim-config-local" },
+	-- Close brackets/braces automatically
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = true,
+		-- use opts = {} for passing setup options
+		-- this is equivalent to setup({}) function
+	},
 }
 
 -- vim: ts=2 sw=2

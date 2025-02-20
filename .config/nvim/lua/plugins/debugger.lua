@@ -1,7 +1,7 @@
-local dap = require("dap")
-local dap_ui = require("dapui")
-
 local function config()
+	local dap = require("dap")
+	local dap_ui = require("dapui")
+
 	-- Open DAP ui after debugging has started
 	dap.listeners.after.event_initialized["dapui_config"] = function()
 		vim.cmd([[set laststatus=3]])
@@ -156,6 +156,9 @@ local function config()
 end
 
 local function terminate_debugger()
+	local dap = require("dap")
+	local dap_ui = require("dapui")
+
 	dap.terminate()
 	vim.cmd([[set cmdheight=1]])
 	vim.cmd([[set laststatus=2]])
@@ -163,14 +166,19 @@ local function terminate_debugger()
 end
 
 local function toggle_logpoint()
-	dap.set_breakpoint(nil, nil, vim.fn.input("Log point message > "))
+	require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message > "))
 end
 
 local function toggle_conditional_breakpoint()
-	dap.set_breakpoint(vim.fn.input("Condition > "), nil, nil)
+	require("dap").set_breakpoint(vim.fn.input("Condition > "), nil, nil)
 end
 
 return {
+	-- Debug adapter
+	{
+		"mfussenegger/nvim-dap",
+		lazy = true,
+	},
 	-- Debug adapter UI
 	{
 		"rcarriga/nvim-dap-ui",
@@ -178,24 +186,19 @@ return {
 		config = config,
 		-- stylua: ignore
 		keys = {
-			{ "<F5>", dap.continue, desc = "[dap] Continue debugger execution" },
+			{ "<F5>", require("dap").continue, desc = "[dap] Continue debugger execution" },
 			{ "<S-F5>", terminate_debugger, desc = "[dap] Terminate debugger" },
-			{ "<C-b>", dap.toggle_breakpoint, desc = "[dap] Toggle line breakpoint" },
+			{ "<C-b>", require("dap").toggle_breakpoint, desc = "[dap] Toggle line breakpoint" },
 			{ "<leader>dlp", toggle_logpoint, desc = "[dap] Toggle log point" },
 			{ "<leader>dcp", toggle_conditional_breakpoint, desc = "[dap] Toggle conditional breakpoint" },
-			{ "<F10>", dap.step_into, desc = "[dap] Step into" },
-			{ "<F11>", dap.step_over, desc = "[dap] Step over" },
-			{ "<F12>", dap.step_out, desc = "[dap] Step out" },
+			{ "<F10>", require("dap").step_into, desc = "[dap] Step into" },
+			{ "<F11>", require("dap").step_over, desc = "[dap] Step over" },
+			{ "<F12>", require("dap").step_out, desc = "[dap] Step out" },
 		},
 		cmd = {
 			"DapBreakOnExceptions",
 			"DapNew",
 		},
-	},
-	-- Debug adapter
-	{
-		"mfussenegger/nvim-dap",
-		lazy = true,
 	},
 	-- JS debug adapter
 	{
@@ -208,5 +211,9 @@ return {
 		"leoluz/nvim-dap-go",
 		lazy = true,
 		dependencies = { "nvim-neotest/nvim-nio" },
+	},
+	{
+		"mfussenegger/nvim-dap-python",
+		lazy = true,
 	},
 }

@@ -210,9 +210,19 @@ return {
 		"gbprod/nord.nvim",
 		config = config,
 		init = function()
-			vim.cmd([[colorscheme nord]])
+			vim.cmd.colorscheme("nord") -- my favorite
 		end,
 	},
+	-- {
+	-- 	"slugbyte/lackluster.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	init = function()
+	-- 		-- vim.cmd.colorscheme("lackluster")
+	-- 		vim.cmd.colorscheme("lackluster-hack") -- my favorite
+	-- 		-- vim.cmd.colorscheme("lackluster-mint")
+	-- 	end,
+	-- },
 	-- {
 	-- 	"aktersnurra/no-clown-fiesta.nvim",
 	-- 	opts = {

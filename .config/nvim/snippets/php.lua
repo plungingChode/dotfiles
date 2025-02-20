@@ -91,6 +91,13 @@ local doc_comment = s("doccomment", {
 })
 
 -- stylua: ignore
+--
+-- /** @var <1> */ >
+local variable_type_annotation = s("vardoc", {
+  t("/** @var "), i(1), t(" */ "), i(0)
+})
+
+-- stylua: ignore
 local classdef = s("classdef", {
   t({ "<?php", "", "" }),
   t({ "declare(strict_types=1);", "", "" }),
@@ -120,13 +127,42 @@ local function make_log_call(log_level)
   })
 end
 
+-- stylua: ignore
+local endpoint_definition = s("endpoint", {
+  t("public function "), i(1), t({"(Request $request): ResponseInterface", "" }),
+  t({ "{", "" }),
+  t("    "), i(0), t({ "", "" }),
+  t({ "}", "" }),
+})
+
+-- stylua: ignore
+local test_definition = s("unittest", {
+  t({ "#[Test]", "" }),
+  t("public function "), i(1), t({"(): void", "" }),
+  t({ "{", "" }),
+  t("    "), i(0), t({ "", "" }),
+  t({ "}", "" }),
+})
+
+-- stylua: ignore
+local try_catch = s("try .. catch", {
+  t({ "try {", "" }),
+  t("    "), i(1), t({"", "" }),
+  t({ "} catch () {", "", "" }),
+  t({ "}", "" }),
+})
+
 ls.add_snippets("php", {
 	iferr,
 	errguard,
 	postfix_iferr,
 	postfix_unwrap,
 	doc_comment,
+	variable_type_annotation,
 	classdef,
+	endpoint_definition,
+	test_definition,
+	try_catch,
 
 	make_function_decl("pubfn", "public"),
 	make_function_decl("profn", "protected"),
